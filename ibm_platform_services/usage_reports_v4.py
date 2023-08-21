@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# IBM OpenAPI SDK Code Generator Version: 3.64.1-cee95189-20230124-211647
+# IBM OpenAPI SDK Code Generator Version: 3.75.0-726bc7e3-20230713-221716
 
 """
 Usage reports for IBM Cloud accounts
@@ -23,6 +23,7 @@ API Version: 4.0.6
 """
 
 from datetime import datetime
+from enum import Enum
 from typing import Dict, List
 import json
 
@@ -54,7 +55,9 @@ class UsageReportsV4(BaseService):
                parameters and external configuration.
         """
         authenticator = get_authenticator_from_environment(service_name)
-        service = cls(authenticator)
+        service = cls(
+            authenticator
+            )
         service.configure_service(service_name)
         return service
 
@@ -75,7 +78,12 @@ class UsageReportsV4(BaseService):
     # Account operations
     #########################
 
-    def get_account_summary(self, account_id: str, billingmonth: str, **kwargs) -> DetailedResponse:
+    def get_account_summary(
+        self,
+        account_id: str,
+        billingmonth: str,
+        **kwargs,
+    ) -> DetailedResponse:
         """
         Get account summary.
 
@@ -96,7 +104,9 @@ class UsageReportsV4(BaseService):
             raise ValueError('billingmonth must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(
-            service_name=self.DEFAULT_SERVICE_NAME, service_version='V4', operation_id='get_account_summary'
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V4',
+            operation_id='get_account_summary',
         )
         headers.update(sdk_headers)
 
@@ -109,13 +119,23 @@ class UsageReportsV4(BaseService):
         path_param_values = self.encode_path_vars(account_id, billingmonth)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/v4/accounts/{account_id}/summary/{billingmonth}'.format(**path_param_dict)
-        request = self.prepare_request(method='GET', url=url, headers=headers)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
     def get_account_usage(
-        self, account_id: str, billingmonth: str, *, names: bool = None, accept_language: str = None, **kwargs
+        self,
+        account_id: str,
+        billingmonth: str,
+        *,
+        names: bool = None,
+        accept_language: str = None,
+        **kwargs,
     ) -> DetailedResponse:
         """
         Get account usage.
@@ -143,7 +163,9 @@ class UsageReportsV4(BaseService):
             'Accept-Language': accept_language,
         }
         sdk_headers = get_sdk_headers(
-            service_name=self.DEFAULT_SERVICE_NAME, service_version='V4', operation_id='get_account_usage'
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V4',
+            operation_id='get_account_usage',
         )
         headers.update(sdk_headers)
 
@@ -160,7 +182,12 @@ class UsageReportsV4(BaseService):
         path_param_values = self.encode_path_vars(account_id, billingmonth)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/v4/accounts/{account_id}/usage/{billingmonth}'.format(**path_param_dict)
-        request = self.prepare_request(method='GET', url=url, headers=headers, params=params)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+            params=params,
+        )
 
         response = self.send(request, **kwargs)
         return response
@@ -210,7 +237,9 @@ class UsageReportsV4(BaseService):
             'Accept-Language': accept_language,
         }
         sdk_headers = get_sdk_headers(
-            service_name=self.DEFAULT_SERVICE_NAME, service_version='V4', operation_id='get_resource_group_usage'
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V4',
+            operation_id='get_resource_group_usage',
         )
         headers.update(sdk_headers)
 
@@ -226,10 +255,13 @@ class UsageReportsV4(BaseService):
         path_param_keys = ['account_id', 'resource_group_id', 'billingmonth']
         path_param_values = self.encode_path_vars(account_id, resource_group_id, billingmonth)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/v4/accounts/{account_id}/resource_groups/{resource_group_id}/usage/{billingmonth}'.format(
-            **path_param_dict
+        url = '/v4/accounts/{account_id}/resource_groups/{resource_group_id}/usage/{billingmonth}'.format(**path_param_dict)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+            params=params,
         )
-        request = self.prepare_request(method='GET', url=url, headers=headers, params=params)
 
         response = self.send(request, **kwargs)
         return response
@@ -240,6 +272,7 @@ class UsageReportsV4(BaseService):
         billingmonth: str,
         *,
         names: bool = None,
+        tags: bool = None,
         accept_language: str = None,
         limit: int = None,
         start: str = None,
@@ -262,6 +295,8 @@ class UsageReportsV4(BaseService):
                requested.  Format is yyyy-mm.
         :param bool names: (optional) Include the name of every resource, plan,
                resource instance, organization, and resource group.
+        :param bool tags: (optional) Include the user tags associated with every
+               resource instance. By default it is always `true`.
         :param str accept_language: (optional) Prioritize the names returned in the
                order of the specified languages. Language will default to English.
         :param int limit: (optional) Number of usage records returned. The default
@@ -288,12 +323,15 @@ class UsageReportsV4(BaseService):
             'Accept-Language': accept_language,
         }
         sdk_headers = get_sdk_headers(
-            service_name=self.DEFAULT_SERVICE_NAME, service_version='V4', operation_id='get_resource_usage_account'
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V4',
+            operation_id='get_resource_usage_account',
         )
         headers.update(sdk_headers)
 
         params = {
             '_names': names,
+            '_tags': tags,
             '_limit': limit,
             '_start': start,
             'resource_group_id': resource_group_id,
@@ -313,7 +351,12 @@ class UsageReportsV4(BaseService):
         path_param_values = self.encode_path_vars(account_id, billingmonth)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/v4/accounts/{account_id}/resource_instances/usage/{billingmonth}'.format(**path_param_dict)
-        request = self.prepare_request(method='GET', url=url, headers=headers, params=params)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+            params=params,
+        )
 
         response = self.send(request, **kwargs)
         return response
@@ -325,6 +368,7 @@ class UsageReportsV4(BaseService):
         billingmonth: str,
         *,
         names: bool = None,
+        tags: bool = None,
         accept_language: str = None,
         limit: int = None,
         start: str = None,
@@ -348,6 +392,8 @@ class UsageReportsV4(BaseService):
                requested.  Format is yyyy-mm.
         :param bool names: (optional) Include the name of every resource, plan,
                resource instance, organization, and resource group.
+        :param bool tags: (optional) Include the user tags associated with every
+               resource instance. By default it is always `true`.
         :param str accept_language: (optional) Prioritize the names returned in the
                order of the specified languages. Language will default to English.
         :param int limit: (optional) Number of usage records returned. The default
@@ -382,6 +428,7 @@ class UsageReportsV4(BaseService):
 
         params = {
             '_names': names,
+            '_tags': tags,
             '_limit': limit,
             '_start': start,
             'resource_instance_id': resource_instance_id,
@@ -398,10 +445,13 @@ class UsageReportsV4(BaseService):
         path_param_keys = ['account_id', 'resource_group_id', 'billingmonth']
         path_param_values = self.encode_path_vars(account_id, resource_group_id, billingmonth)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/v4/accounts/{account_id}/resource_groups/{resource_group_id}/resource_instances/usage/{billingmonth}'.format(
-            **path_param_dict
+        url = '/v4/accounts/{account_id}/resource_groups/{resource_group_id}/resource_instances/usage/{billingmonth}'.format(**path_param_dict)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+            params=params,
         )
-        request = self.prepare_request(method='GET', url=url, headers=headers, params=params)
 
         response = self.send(request, **kwargs)
         return response
@@ -413,6 +463,7 @@ class UsageReportsV4(BaseService):
         billingmonth: str,
         *,
         names: bool = None,
+        tags: bool = None,
         accept_language: str = None,
         limit: int = None,
         start: str = None,
@@ -435,6 +486,8 @@ class UsageReportsV4(BaseService):
                requested.  Format is yyyy-mm.
         :param bool names: (optional) Include the name of every resource, plan,
                resource instance, organization, and resource group.
+        :param bool tags: (optional) Include the user tags associated with every
+               resource instance. By default it is always `true`.
         :param str accept_language: (optional) Prioritize the names returned in the
                order of the specified languages. Language will default to English.
         :param int limit: (optional) Number of usage records returned. The default
@@ -461,12 +514,15 @@ class UsageReportsV4(BaseService):
             'Accept-Language': accept_language,
         }
         sdk_headers = get_sdk_headers(
-            service_name=self.DEFAULT_SERVICE_NAME, service_version='V4', operation_id='get_resource_usage_org'
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V4',
+            operation_id='get_resource_usage_org',
         )
         headers.update(sdk_headers)
 
         params = {
             '_names': names,
+            '_tags': tags,
             '_limit': limit,
             '_start': start,
             'resource_instance_id': resource_instance_id,
@@ -483,12 +539,13 @@ class UsageReportsV4(BaseService):
         path_param_keys = ['account_id', 'organization_id', 'billingmonth']
         path_param_values = self.encode_path_vars(account_id, organization_id, billingmonth)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = (
-            '/v4/accounts/{account_id}/organizations/{organization_id}/resource_instances/usage/{billingmonth}'.format(
-                **path_param_dict
-            )
+        url = '/v4/accounts/{account_id}/organizations/{organization_id}/resource_instances/usage/{billingmonth}'.format(**path_param_dict)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+            params=params,
         )
-        request = self.prepare_request(method='GET', url=url, headers=headers, params=params)
 
         response = self.send(request, **kwargs)
         return response
@@ -537,7 +594,9 @@ class UsageReportsV4(BaseService):
             'Accept-Language': accept_language,
         }
         sdk_headers = get_sdk_headers(
-            service_name=self.DEFAULT_SERVICE_NAME, service_version='V4', operation_id='get_org_usage'
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V4',
+            operation_id='get_org_usage',
         )
         headers.update(sdk_headers)
 
@@ -554,7 +613,334 @@ class UsageReportsV4(BaseService):
         path_param_values = self.encode_path_vars(account_id, organization_id, billingmonth)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/v4/accounts/{account_id}/organizations/{organization_id}/usage/{billingmonth}'.format(**path_param_dict)
-        request = self.prepare_request(method='GET', url=url, headers=headers, params=params)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+            params=params,
+        )
+
+        response = self.send(request, **kwargs)
+        return response
+
+    #########################
+    # Billing reports snapshot
+    #########################
+
+    def create_reports_snapshot_config(
+        self,
+        account_id: str,
+        interval: str,
+        cos_bucket: str,
+        cos_location: str,
+        *,
+        cos_reports_folder: str = None,
+        report_types: List[str] = None,
+        versioning: str = None,
+        **kwargs,
+    ) -> DetailedResponse:
+        """
+        Setup the snapshot configuration.
+
+        Snapshots of the billing reports would be taken on a periodic interval and stored
+        based on the configuration setup by the customer for the given Account Id.
+
+        :param str account_id: Account ID for which billing report snapshot is
+               configured.
+        :param str interval: Frequency of taking the snapshot of the billing
+               reports.
+        :param str cos_bucket: The name of the COS bucket to store the snapshot of
+               the billing reports.
+        :param str cos_location: Region of the COS instance.
+        :param str cos_reports_folder: (optional) The billing reports root folder
+               to store the billing reports snapshots. Defaults to
+               "IBMCloud-Billing-Reports".
+        :param List[str] report_types: (optional) The type of billing reports to
+               take snapshot of. Possible values are [account_summary, enterprise_summary,
+               account_resource_instance_usage].
+        :param str versioning: (optional) A new version of report is created or the
+               existing report version is overwritten with every update. Defaults to
+               "new".
+        :param dict headers: A `dict` containing the request headers
+        :return: A `DetailedResponse` containing the result, headers and HTTP status code.
+        :rtype: DetailedResponse with `dict` result representing a `SnapshotConfig` object
+        """
+
+        if account_id is None:
+            raise ValueError('account_id must be provided')
+        if interval is None:
+            raise ValueError('interval must be provided')
+        if cos_bucket is None:
+            raise ValueError('cos_bucket must be provided')
+        if cos_location is None:
+            raise ValueError('cos_location must be provided')
+        headers = {}
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V4',
+            operation_id='create_reports_snapshot_config',
+        )
+        headers.update(sdk_headers)
+
+        data = {
+            'account_id': account_id,
+            'interval': interval,
+            'cos_bucket': cos_bucket,
+            'cos_location': cos_location,
+            'cos_reports_folder': cos_reports_folder,
+            'report_types': report_types,
+            'versioning': versioning,
+        }
+        data = {k: v for (k, v) in data.items() if v is not None}
+        data = json.dumps(data)
+        headers['content-type'] = 'application/json'
+
+        if 'headers' in kwargs:
+            headers.update(kwargs.get('headers'))
+            del kwargs['headers']
+        headers['Accept'] = 'application/json'
+
+        url = '/v1/billing-reports-snapshot-config'
+        request = self.prepare_request(
+            method='POST',
+            url=url,
+            headers=headers,
+            data=data,
+        )
+
+        response = self.send(request, **kwargs)
+        return response
+
+    def get_reports_snapshot_config(
+        self,
+        account_id: str,
+        **kwargs,
+    ) -> DetailedResponse:
+        """
+        Fetch the snapshot configuration.
+
+        Returns the configuration of snapshot of the billing reports setup by the customer
+        for the given Account Id.
+
+        :param str account_id: Account ID for which the billing report snapshot is
+               configured.
+        :param dict headers: A `dict` containing the request headers
+        :return: A `DetailedResponse` containing the result, headers and HTTP status code.
+        :rtype: DetailedResponse with `dict` result representing a `SnapshotConfig` object
+        """
+
+        if not account_id:
+            raise ValueError('account_id must be provided')
+        headers = {}
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V4',
+            operation_id='get_reports_snapshot_config',
+        )
+        headers.update(sdk_headers)
+
+        params = {
+            'account_id': account_id,
+        }
+
+        if 'headers' in kwargs:
+            headers.update(kwargs.get('headers'))
+            del kwargs['headers']
+        headers['Accept'] = 'application/json'
+
+        url = '/v1/billing-reports-snapshot-config'
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+            params=params,
+        )
+
+        response = self.send(request, **kwargs)
+        return response
+
+    def update_reports_snapshot_config(
+        self,
+        account_id: str,
+        *,
+        interval: str = None,
+        cos_bucket: str = None,
+        cos_location: str = None,
+        cos_reports_folder: str = None,
+        report_types: List[str] = None,
+        versioning: str = None,
+        **kwargs,
+    ) -> DetailedResponse:
+        """
+        Update the snapshot configuration.
+
+        Updates the configuration of snapshot of the billing reports setup by the customer
+        for the given Account Id.
+
+        :param str account_id: Account ID for which billing report snapshot is
+               configured.
+        :param str interval: (optional) Frequency of taking the snapshot of the
+               billing reports.
+        :param str cos_bucket: (optional) The name of the COS bucket to store the
+               snapshot of the billing reports.
+        :param str cos_location: (optional) Region of the COS instance.
+        :param str cos_reports_folder: (optional) The billing reports root folder
+               to store the billing reports snapshots.
+        :param List[str] report_types: (optional) The type of billing reports to
+               take snapshot of. Possible values are [account_summary, enterprise_summary,
+               account_resource_instance_usage].
+        :param str versioning: (optional) A new version of report is created or the
+               existing report version is overwritten with every update.
+        :param dict headers: A `dict` containing the request headers
+        :return: A `DetailedResponse` containing the result, headers and HTTP status code.
+        :rtype: DetailedResponse with `dict` result representing a `SnapshotConfig` object
+        """
+
+        if account_id is None:
+            raise ValueError('account_id must be provided')
+        headers = {}
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V4',
+            operation_id='update_reports_snapshot_config',
+        )
+        headers.update(sdk_headers)
+
+        data = {
+            'account_id': account_id,
+            'interval': interval,
+            'cos_bucket': cos_bucket,
+            'cos_location': cos_location,
+            'cos_reports_folder': cos_reports_folder,
+            'report_types': report_types,
+            'versioning': versioning,
+        }
+        data = {k: v for (k, v) in data.items() if v is not None}
+        data = json.dumps(data)
+        headers['content-type'] = 'application/json'
+
+        if 'headers' in kwargs:
+            headers.update(kwargs.get('headers'))
+            del kwargs['headers']
+        headers['Accept'] = 'application/json'
+
+        url = '/v1/billing-reports-snapshot-config'
+        request = self.prepare_request(
+            method='PATCH',
+            url=url,
+            headers=headers,
+            data=data,
+        )
+
+        response = self.send(request, **kwargs)
+        return response
+
+    def delete_reports_snapshot_config(
+        self,
+        account_id: str,
+        **kwargs,
+    ) -> DetailedResponse:
+        """
+        Delete the snapshot configuration.
+
+        Delete the configuration of snapshot of the billing reports setup by the customer
+        for the given Account Id.
+
+        :param str account_id: Account ID for which the billing report snapshot is
+               configured.
+        :param dict headers: A `dict` containing the request headers
+        :return: A `DetailedResponse` containing the result, headers and HTTP status code.
+        :rtype: DetailedResponse
+        """
+
+        if not account_id:
+            raise ValueError('account_id must be provided')
+        headers = {}
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V4',
+            operation_id='delete_reports_snapshot_config',
+        )
+        headers.update(sdk_headers)
+
+        params = {
+            'account_id': account_id,
+        }
+
+        if 'headers' in kwargs:
+            headers.update(kwargs.get('headers'))
+            del kwargs['headers']
+
+        url = '/v1/billing-reports-snapshot-config'
+        request = self.prepare_request(
+            method='DELETE',
+            url=url,
+            headers=headers,
+            params=params,
+        )
+
+        response = self.send(request, **kwargs)
+        return response
+
+    def get_reports_snapshot(
+        self,
+        account_id: str,
+        month: str,
+        *,
+        date_from: float = None,
+        date_to: float = None,
+        **kwargs,
+    ) -> DetailedResponse:
+        """
+        Fetch the current or past snapshots.
+
+        Returns the billing reports snapshots captured for the given Account Id in the
+        specific time period.
+
+        :param str account_id: Account ID for which the billing report snapshot is
+               requested.
+        :param str month: The month for which billing report snapshot is requested.
+                Format is yyyy-mm.
+        :param float date_from: (optional) Timestamp in milliseconds for which
+               billing report snapshot is requested.
+        :param float date_to: (optional) Timestamp in milliseconds for which
+               billing report snapshot is requested.
+        :param dict headers: A `dict` containing the request headers
+        :return: A `DetailedResponse` containing the result, headers and HTTP status code.
+        :rtype: DetailedResponse with `dict` result representing a `SnapshotList` object
+        """
+
+        if not account_id:
+            raise ValueError('account_id must be provided')
+        if not month:
+            raise ValueError('month must be provided')
+        headers = {}
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V4',
+            operation_id='get_reports_snapshot',
+        )
+        headers.update(sdk_headers)
+
+        params = {
+            'account_id': account_id,
+            'month': month,
+            'date_from': date_from,
+            'date_to': date_to,
+        }
+
+        if 'headers' in kwargs:
+            headers.update(kwargs.get('headers'))
+            del kwargs['headers']
+        headers['Accept'] = 'application/json'
+
+        url = '/v1/billing-reports-snapshots'
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+            params=params,
+        )
 
         response = self.send(request, **kwargs)
         return response
@@ -874,7 +1260,14 @@ class Discount:
     :attr float discount: The discount percentage.
     """
 
-    def __init__(self, ref: str, discount: float, *, name: str = None, display_name: str = None) -> None:
+    def __init__(
+        self,
+        ref: str,
+        discount: float,
+        *,
+        name: str = None,
+        display_name: str = None,
+    ) -> None:
         """
         Initialize a Discount object.
 
@@ -970,11 +1363,15 @@ class InstanceUsage:
           rated.
     :attr str plan_name: (optional) The name of the plan where the instance was
           provisioned and rated.
+    :attr str pricing_plan_id: (optional) The ID of the pricing plan used to rate
+          the usage.
     :attr str month: The month.
     :attr List[Metric] usage: All the resource used in the account.
     :attr bool pending: (optional) Pending charge from classic infrastructure.
     :attr float currency_rate: (optional) The value of the account's currency in
           USD.
+    :attr List[object] tags: (optional) The user tags associated with a resource
+          instance.
     """
 
     def __init__(
@@ -1001,8 +1398,10 @@ class InstanceUsage:
         region: str = None,
         pricing_region: str = None,
         plan_name: str = None,
+        pricing_plan_id: str = None,
         pending: bool = None,
         currency_rate: float = None,
+        tags: List[object] = None,
     ) -> None:
         """
         Initialize a InstanceUsage object.
@@ -1033,9 +1432,13 @@ class InstanceUsage:
                that was submitted was rated.
         :param str plan_name: (optional) The name of the plan where the instance
                was provisioned and rated.
+        :param str pricing_plan_id: (optional) The ID of the pricing plan used to
+               rate the usage.
         :param bool pending: (optional) Pending charge from classic infrastructure.
         :param float currency_rate: (optional) The value of the account's currency
                in USD.
+        :param List[object] tags: (optional) The user tags associated with a
+               resource instance.
         """
         self.account_id = account_id
         self.resource_instance_id = resource_instance_id
@@ -1056,10 +1459,12 @@ class InstanceUsage:
         self.billable = billable
         self.plan_id = plan_id
         self.plan_name = plan_name
+        self.pricing_plan_id = pricing_plan_id
         self.month = month
         self.usage = usage
         self.pending = pending
         self.currency_rate = currency_rate
+        self.tags = tags
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'InstanceUsage':
@@ -1117,6 +1522,8 @@ class InstanceUsage:
             raise ValueError('Required property \'plan_id\' not present in InstanceUsage JSON')
         if 'plan_name' in _dict:
             args['plan_name'] = _dict.get('plan_name')
+        if 'pricing_plan_id' in _dict:
+            args['pricing_plan_id'] = _dict.get('pricing_plan_id')
         if 'month' in _dict:
             args['month'] = _dict.get('month')
         else:
@@ -1129,6 +1536,8 @@ class InstanceUsage:
             args['pending'] = _dict.get('pending')
         if 'currency_rate' in _dict:
             args['currency_rate'] = _dict.get('currency_rate')
+        if 'tags' in _dict:
+            args['tags'] = _dict.get('tags')
         return cls(**args)
 
     @classmethod
@@ -1177,6 +1586,8 @@ class InstanceUsage:
             _dict['plan_id'] = self.plan_id
         if hasattr(self, 'plan_name') and self.plan_name is not None:
             _dict['plan_name'] = self.plan_name
+        if hasattr(self, 'pricing_plan_id') and self.pricing_plan_id is not None:
+            _dict['pricing_plan_id'] = self.pricing_plan_id
         if hasattr(self, 'month') and self.month is not None:
             _dict['month'] = self.month
         if hasattr(self, 'usage') and self.usage is not None:
@@ -1191,6 +1602,8 @@ class InstanceUsage:
             _dict['pending'] = self.pending
         if hasattr(self, 'currency_rate') and self.currency_rate is not None:
             _dict['currency_rate'] = self.currency_rate
+        if hasattr(self, 'tags') and self.tags is not None:
+            _dict['tags'] = self.tags
         return _dict
 
     def _to_dict(self):
@@ -1219,7 +1632,11 @@ class InstancesUsageFirst:
     :attr str href: (optional) A link to a page of query results.
     """
 
-    def __init__(self, *, href: str = None) -> None:
+    def __init__(
+        self,
+        *,
+        href: str = None,
+    ) -> None:
         """
         Initialize a InstancesUsageFirst object.
 
@@ -1275,7 +1692,12 @@ class InstancesUsageNext:
           the next page.
     """
 
-    def __init__(self, *, href: str = None, offset: str = None) -> None:
+    def __init__(
+        self,
+        *,
+        href: str = None,
+        offset: str = None,
+    ) -> None:
         """
         Initialize a InstancesUsageNext object.
 
@@ -1721,7 +2143,12 @@ class OfferCredits:
     :attr float balance: The remaining credits in the offer.
     """
 
-    def __init__(self, starting_balance: float, used: float, balance: float) -> None:
+    def __init__(
+        self,
+        starting_balance: float,
+        used: float,
+        balance: float,
+    ) -> None:
         """
         Initialize a OfferCredits object.
 
@@ -1930,7 +2357,8 @@ class Plan:
     :attr str plan_id: The ID of the plan.
     :attr str plan_name: (optional) The name of the plan.
     :attr str pricing_region: (optional) The pricing region for the plan.
-    :attr str pricing_plan_id: (optional)
+    :attr str pricing_plan_id: (optional) The ID of the pricing plan used to rate
+          the usage.
     :attr bool billable: Indicates if the plan charges are billed to the customer.
     :attr float cost: The total cost incurred by the plan.
     :attr float rated_cost: Total pre-discounted cost incurred by the plan.
@@ -1965,7 +2393,8 @@ class Plan:
         :param List[Discount] discounts: All the discounts applicable to the plan.
         :param str plan_name: (optional) The name of the plan.
         :param str pricing_region: (optional) The pricing region for the plan.
-        :param str pricing_plan_id: (optional)
+        :param str pricing_plan_id: (optional) The ID of the pricing plan used to
+               rate the usage.
         :param bool pending: (optional) Pending charge from classic infrastructure.
         """
         self.plan_id = plan_id
@@ -2369,7 +2798,11 @@ class ResourcesSummary:
           in the account.
     """
 
-    def __init__(self, billable_cost: float, non_billable_cost: float) -> None:
+    def __init__(
+        self,
+        billable_cost: float,
+        non_billable_cost: float,
+    ) -> None:
         """
         Initialize a ResourcesSummary object.
 
@@ -2426,6 +2859,1188 @@ class ResourcesSummary:
     def __ne__(self, other: 'ResourcesSummary') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
+
+
+class SnapshotConfigHistoryItem:
+    """
+    SnapshotConfigHistoryItem.
+
+    :attr float start_time: (optional) Timestamp in milliseconds when the snapshot
+          configuration was created.
+    :attr float end_time: (optional) Timestamp in milliseconds when the snapshot
+          configuration ends.
+    :attr str updated_by: (optional) Account that updated the billing snapshot
+          configuration.
+    :attr str account_id: (optional) Account ID for which billing report snapshot is
+          configured.
+    :attr str state: (optional) Status of the billing snapshot configuration.
+          Possible values are [enabled, disabled].
+    :attr str account_type: (optional) Type of account. Possible values [enterprise,
+          account].
+    :attr str interval: (optional) Frequency of taking the snapshot of the billing
+          reports.
+    :attr str versioning: (optional) A new version of report is created or the
+          existing report version is overwritten with every update.
+    :attr List[str] report_types: (optional) The type of billing reports to take
+          snapshot of. Possible values are [account_summary, enterprise_summary,
+          account_resource_instance_usage].
+    :attr str compression: (optional) Compression format of the snapshot report.
+    :attr str content_type: (optional) Type of content stored in snapshot report.
+    :attr str cos_reports_folder: (optional) The billing reports root folder to
+          store the billing reports snapshots. Defaults to "IBMCloud-Billing-Reports".
+    :attr str cos_bucket: (optional) The name of the COS bucket to store the
+          snapshot of the billing reports.
+    :attr str cos_location: (optional) Region of the COS instance.
+    :attr str cos_endpoint: (optional) The endpoint of the COS instance.
+    """
+
+    def __init__(
+        self,
+        *,
+        start_time: float = None,
+        end_time: float = None,
+        updated_by: str = None,
+        account_id: str = None,
+        state: str = None,
+        account_type: str = None,
+        interval: str = None,
+        versioning: str = None,
+        report_types: List[str] = None,
+        compression: str = None,
+        content_type: str = None,
+        cos_reports_folder: str = None,
+        cos_bucket: str = None,
+        cos_location: str = None,
+        cos_endpoint: str = None,
+    ) -> None:
+        """
+        Initialize a SnapshotConfigHistoryItem object.
+
+        :param float start_time: (optional) Timestamp in milliseconds when the
+               snapshot configuration was created.
+        :param float end_time: (optional) Timestamp in milliseconds when the
+               snapshot configuration ends.
+        :param str updated_by: (optional) Account that updated the billing snapshot
+               configuration.
+        :param str account_id: (optional) Account ID for which billing report
+               snapshot is configured.
+        :param str state: (optional) Status of the billing snapshot configuration.
+               Possible values are [enabled, disabled].
+        :param str account_type: (optional) Type of account. Possible values
+               [enterprise, account].
+        :param str interval: (optional) Frequency of taking the snapshot of the
+               billing reports.
+        :param str versioning: (optional) A new version of report is created or the
+               existing report version is overwritten with every update.
+        :param List[str] report_types: (optional) The type of billing reports to
+               take snapshot of. Possible values are [account_summary, enterprise_summary,
+               account_resource_instance_usage].
+        :param str compression: (optional) Compression format of the snapshot
+               report.
+        :param str content_type: (optional) Type of content stored in snapshot
+               report.
+        :param str cos_reports_folder: (optional) The billing reports root folder
+               to store the billing reports snapshots. Defaults to
+               "IBMCloud-Billing-Reports".
+        :param str cos_bucket: (optional) The name of the COS bucket to store the
+               snapshot of the billing reports.
+        :param str cos_location: (optional) Region of the COS instance.
+        :param str cos_endpoint: (optional) The endpoint of the COS instance.
+        """
+        self.start_time = start_time
+        self.end_time = end_time
+        self.updated_by = updated_by
+        self.account_id = account_id
+        self.state = state
+        self.account_type = account_type
+        self.interval = interval
+        self.versioning = versioning
+        self.report_types = report_types
+        self.compression = compression
+        self.content_type = content_type
+        self.cos_reports_folder = cos_reports_folder
+        self.cos_bucket = cos_bucket
+        self.cos_location = cos_location
+        self.cos_endpoint = cos_endpoint
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'SnapshotConfigHistoryItem':
+        """Initialize a SnapshotConfigHistoryItem object from a json dictionary."""
+        args = {}
+        if 'start_time' in _dict:
+            args['start_time'] = _dict.get('start_time')
+        if 'end_time' in _dict:
+            args['end_time'] = _dict.get('end_time')
+        if 'updated_by' in _dict:
+            args['updated_by'] = _dict.get('updated_by')
+        if 'account_id' in _dict:
+            args['account_id'] = _dict.get('account_id')
+        if 'state' in _dict:
+            args['state'] = _dict.get('state')
+        if 'account_type' in _dict:
+            args['account_type'] = _dict.get('account_type')
+        if 'interval' in _dict:
+            args['interval'] = _dict.get('interval')
+        if 'versioning' in _dict:
+            args['versioning'] = _dict.get('versioning')
+        if 'report_types' in _dict:
+            args['report_types'] = _dict.get('report_types')
+        if 'compression' in _dict:
+            args['compression'] = _dict.get('compression')
+        if 'content_type' in _dict:
+            args['content_type'] = _dict.get('content_type')
+        if 'cos_reports_folder' in _dict:
+            args['cos_reports_folder'] = _dict.get('cos_reports_folder')
+        if 'cos_bucket' in _dict:
+            args['cos_bucket'] = _dict.get('cos_bucket')
+        if 'cos_location' in _dict:
+            args['cos_location'] = _dict.get('cos_location')
+        if 'cos_endpoint' in _dict:
+            args['cos_endpoint'] = _dict.get('cos_endpoint')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a SnapshotConfigHistoryItem object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'start_time') and self.start_time is not None:
+            _dict['start_time'] = self.start_time
+        if hasattr(self, 'end_time') and self.end_time is not None:
+            _dict['end_time'] = self.end_time
+        if hasattr(self, 'updated_by') and self.updated_by is not None:
+            _dict['updated_by'] = self.updated_by
+        if hasattr(self, 'account_id') and self.account_id is not None:
+            _dict['account_id'] = self.account_id
+        if hasattr(self, 'state') and self.state is not None:
+            _dict['state'] = self.state
+        if hasattr(self, 'account_type') and self.account_type is not None:
+            _dict['account_type'] = self.account_type
+        if hasattr(self, 'interval') and self.interval is not None:
+            _dict['interval'] = self.interval
+        if hasattr(self, 'versioning') and self.versioning is not None:
+            _dict['versioning'] = self.versioning
+        if hasattr(self, 'report_types') and self.report_types is not None:
+            _dict['report_types'] = self.report_types
+        if hasattr(self, 'compression') and self.compression is not None:
+            _dict['compression'] = self.compression
+        if hasattr(self, 'content_type') and self.content_type is not None:
+            _dict['content_type'] = self.content_type
+        if hasattr(self, 'cos_reports_folder') and self.cos_reports_folder is not None:
+            _dict['cos_reports_folder'] = self.cos_reports_folder
+        if hasattr(self, 'cos_bucket') and self.cos_bucket is not None:
+            _dict['cos_bucket'] = self.cos_bucket
+        if hasattr(self, 'cos_location') and self.cos_location is not None:
+            _dict['cos_location'] = self.cos_location
+        if hasattr(self, 'cos_endpoint') and self.cos_endpoint is not None:
+            _dict['cos_endpoint'] = self.cos_endpoint
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this SnapshotConfigHistoryItem object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'SnapshotConfigHistoryItem') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'SnapshotConfigHistoryItem') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+    class StateEnum(str, Enum):
+        """
+        Status of the billing snapshot configuration. Possible values are [enabled,
+        disabled].
+        """
+
+        ENABLED = 'enabled'
+        DISABLED = 'disabled'
+
+
+    class AccountTypeEnum(str, Enum):
+        """
+        Type of account. Possible values [enterprise, account].
+        """
+
+        ACCOUNT = 'account'
+        ENTERPRISE = 'enterprise'
+
+
+    class IntervalEnum(str, Enum):
+        """
+        Frequency of taking the snapshot of the billing reports.
+        """
+
+        DAILY = 'daily'
+
+
+    class VersioningEnum(str, Enum):
+        """
+        A new version of report is created or the existing report version is overwritten
+        with every update.
+        """
+
+        NEW = 'new'
+        OVERWRITE = 'overwrite'
+
+
+    class ReportTypesEnum(str, Enum):
+        """
+        report_types.
+        """
+
+        ACCOUNT_SUMMARY = 'account_summary'
+        ENTERPRISE_SUMMARY = 'enterprise_summary'
+        ACCOUNT_RESOURCE_INSTANCE_USAGE = 'account_resource_instance_usage'
+
+
+
+class SnapshotList:
+    """
+    List of billing reports snapshots.
+
+    :attr float count: (optional) Number of total snapshots.
+    :attr SnapshotListFirst first: (optional) Reference to the first page of the
+          search query.
+    :attr SnapshotListNext next: (optional) Reference to the next page of the search
+          query if any.
+    :attr List[SnapshotListSnapshotsItem] snapshots: (optional)
+    """
+
+    def __init__(
+        self,
+        *,
+        count: float = None,
+        first: 'SnapshotListFirst' = None,
+        next: 'SnapshotListNext' = None,
+        snapshots: List['SnapshotListSnapshotsItem'] = None,
+    ) -> None:
+        """
+        Initialize a SnapshotList object.
+
+        :param float count: (optional) Number of total snapshots.
+        :param SnapshotListFirst first: (optional) Reference to the first page of
+               the search query.
+        :param SnapshotListNext next: (optional) Reference to the next page of the
+               search query if any.
+        :param List[SnapshotListSnapshotsItem] snapshots: (optional)
+        """
+        self.count = count
+        self.first = first
+        self.next = next
+        self.snapshots = snapshots
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'SnapshotList':
+        """Initialize a SnapshotList object from a json dictionary."""
+        args = {}
+        if 'count' in _dict:
+            args['count'] = _dict.get('count')
+        if 'first' in _dict:
+            args['first'] = SnapshotListFirst.from_dict(_dict.get('first'))
+        if 'next' in _dict:
+            args['next'] = SnapshotListNext.from_dict(_dict.get('next'))
+        if 'snapshots' in _dict:
+            args['snapshots'] = [SnapshotListSnapshotsItem.from_dict(v) for v in _dict.get('snapshots')]
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a SnapshotList object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'count') and self.count is not None:
+            _dict['count'] = self.count
+        if hasattr(self, 'first') and self.first is not None:
+            if isinstance(self.first, dict):
+                _dict['first'] = self.first
+            else:
+                _dict['first'] = self.first.to_dict()
+        if hasattr(self, 'next') and self.next is not None:
+            if isinstance(self.next, dict):
+                _dict['next'] = self.next
+            else:
+                _dict['next'] = self.next.to_dict()
+        if hasattr(self, 'snapshots') and self.snapshots is not None:
+            snapshots_list = []
+            for v in self.snapshots:
+                if isinstance(v, dict):
+                    snapshots_list.append(v)
+                else:
+                    snapshots_list.append(v.to_dict())
+            _dict['snapshots'] = snapshots_list
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this SnapshotList object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'SnapshotList') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'SnapshotList') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class SnapshotListFirst:
+    """
+    Reference to the first page of the search query.
+
+    :attr str href: (optional)
+    """
+
+    def __init__(
+        self,
+        *,
+        href: str = None,
+    ) -> None:
+        """
+        Initialize a SnapshotListFirst object.
+
+        :param str href: (optional)
+        """
+        self.href = href
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'SnapshotListFirst':
+        """Initialize a SnapshotListFirst object from a json dictionary."""
+        args = {}
+        if 'href' in _dict:
+            args['href'] = _dict.get('href')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a SnapshotListFirst object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'href') and self.href is not None:
+            _dict['href'] = self.href
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this SnapshotListFirst object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'SnapshotListFirst') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'SnapshotListFirst') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class SnapshotListNext:
+    """
+    Reference to the next page of the search query if any.
+
+    :attr str href: (optional)
+    """
+
+    def __init__(
+        self,
+        *,
+        href: str = None,
+    ) -> None:
+        """
+        Initialize a SnapshotListNext object.
+
+        :param str href: (optional)
+        """
+        self.href = href
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'SnapshotListNext':
+        """Initialize a SnapshotListNext object from a json dictionary."""
+        args = {}
+        if 'href' in _dict:
+            args['href'] = _dict.get('href')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a SnapshotListNext object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'href') and self.href is not None:
+            _dict['href'] = self.href
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this SnapshotListNext object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'SnapshotListNext') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'SnapshotListNext') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class SnapshotListSnapshotsItem:
+    """
+    Snapshot Schema.
+
+    :attr str account_id: (optional) Account ID for which billing report snapshot is
+          configured.
+    :attr str month: (optional) Month of captured snapshot.
+    :attr str account_type: (optional) Type of account. Possible values are
+          [enterprise, account].
+    :attr float expected_processed_at: (optional) Timestamp of snapshot processed.
+    :attr str state: (optional) Status of the billing snapshot configuration.
+          Possible values are [enabled, disabled].
+    :attr SnapshotListSnapshotsItemBillingPeriod billing_period: (optional) Period
+          of billing in snapshot.
+    :attr str snapshot_id: (optional) Id of the snapshot captured.
+    :attr str charset: (optional) Character encoding used.
+    :attr str compression: (optional) Compression format of the snapshot report.
+    :attr str content_type: (optional) Type of content stored in snapshot report.
+    :attr str bucket: (optional) The name of the COS bucket to store the snapshot of
+          the billing reports.
+    :attr str version: (optional) Version of the snapshot.
+    :attr str created_on: (optional) Date and time of creation of snapshot.
+    :attr List[SnapshotListSnapshotsItemReportTypesItem] report_types: (optional)
+          List of report types configured for the snapshot.
+    :attr List[SnapshotListSnapshotsItemFilesItem] files: (optional) List of
+          location of reports.
+    :attr float processed_at: (optional) Timestamp at which snapshot is captured.
+    """
+
+    def __init__(
+        self,
+        *,
+        account_id: str = None,
+        month: str = None,
+        account_type: str = None,
+        expected_processed_at: float = None,
+        state: str = None,
+        billing_period: 'SnapshotListSnapshotsItemBillingPeriod' = None,
+        snapshot_id: str = None,
+        charset: str = None,
+        compression: str = None,
+        content_type: str = None,
+        bucket: str = None,
+        version: str = None,
+        created_on: str = None,
+        report_types: List['SnapshotListSnapshotsItemReportTypesItem'] = None,
+        files: List['SnapshotListSnapshotsItemFilesItem'] = None,
+        processed_at: float = None,
+    ) -> None:
+        """
+        Initialize a SnapshotListSnapshotsItem object.
+
+        :param str account_id: (optional) Account ID for which billing report
+               snapshot is configured.
+        :param str month: (optional) Month of captured snapshot.
+        :param str account_type: (optional) Type of account. Possible values are
+               [enterprise, account].
+        :param float expected_processed_at: (optional) Timestamp of snapshot
+               processed.
+        :param str state: (optional) Status of the billing snapshot configuration.
+               Possible values are [enabled, disabled].
+        :param SnapshotListSnapshotsItemBillingPeriod billing_period: (optional)
+               Period of billing in snapshot.
+        :param str snapshot_id: (optional) Id of the snapshot captured.
+        :param str charset: (optional) Character encoding used.
+        :param str compression: (optional) Compression format of the snapshot
+               report.
+        :param str content_type: (optional) Type of content stored in snapshot
+               report.
+        :param str bucket: (optional) The name of the COS bucket to store the
+               snapshot of the billing reports.
+        :param str version: (optional) Version of the snapshot.
+        :param str created_on: (optional) Date and time of creation of snapshot.
+        :param List[SnapshotListSnapshotsItemReportTypesItem] report_types:
+               (optional) List of report types configured for the snapshot.
+        :param List[SnapshotListSnapshotsItemFilesItem] files: (optional) List of
+               location of reports.
+        :param float processed_at: (optional) Timestamp at which snapshot is
+               captured.
+        """
+        self.account_id = account_id
+        self.month = month
+        self.account_type = account_type
+        self.expected_processed_at = expected_processed_at
+        self.state = state
+        self.billing_period = billing_period
+        self.snapshot_id = snapshot_id
+        self.charset = charset
+        self.compression = compression
+        self.content_type = content_type
+        self.bucket = bucket
+        self.version = version
+        self.created_on = created_on
+        self.report_types = report_types
+        self.files = files
+        self.processed_at = processed_at
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'SnapshotListSnapshotsItem':
+        """Initialize a SnapshotListSnapshotsItem object from a json dictionary."""
+        args = {}
+        if 'account_id' in _dict:
+            args['account_id'] = _dict.get('account_id')
+        if 'month' in _dict:
+            args['month'] = _dict.get('month')
+        if 'account_type' in _dict:
+            args['account_type'] = _dict.get('account_type')
+        if 'expected_processed_at' in _dict:
+            args['expected_processed_at'] = _dict.get('expected_processed_at')
+        if 'state' in _dict:
+            args['state'] = _dict.get('state')
+        if 'billing_period' in _dict:
+            args['billing_period'] = SnapshotListSnapshotsItemBillingPeriod.from_dict(_dict.get('billing_period'))
+        if 'snapshot_id' in _dict:
+            args['snapshot_id'] = _dict.get('snapshot_id')
+        if 'charset' in _dict:
+            args['charset'] = _dict.get('charset')
+        if 'compression' in _dict:
+            args['compression'] = _dict.get('compression')
+        if 'content_type' in _dict:
+            args['content_type'] = _dict.get('content_type')
+        if 'bucket' in _dict:
+            args['bucket'] = _dict.get('bucket')
+        if 'version' in _dict:
+            args['version'] = _dict.get('version')
+        if 'created_on' in _dict:
+            args['created_on'] = _dict.get('created_on')
+        if 'report_types' in _dict:
+            args['report_types'] = [SnapshotListSnapshotsItemReportTypesItem.from_dict(v) for v in _dict.get('report_types')]
+        if 'files' in _dict:
+            args['files'] = [SnapshotListSnapshotsItemFilesItem.from_dict(v) for v in _dict.get('files')]
+        if 'processed_at' in _dict:
+            args['processed_at'] = _dict.get('processed_at')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a SnapshotListSnapshotsItem object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'account_id') and self.account_id is not None:
+            _dict['account_id'] = self.account_id
+        if hasattr(self, 'month') and self.month is not None:
+            _dict['month'] = self.month
+        if hasattr(self, 'account_type') and self.account_type is not None:
+            _dict['account_type'] = self.account_type
+        if hasattr(self, 'expected_processed_at') and self.expected_processed_at is not None:
+            _dict['expected_processed_at'] = self.expected_processed_at
+        if hasattr(self, 'state') and self.state is not None:
+            _dict['state'] = self.state
+        if hasattr(self, 'billing_period') and self.billing_period is not None:
+            if isinstance(self.billing_period, dict):
+                _dict['billing_period'] = self.billing_period
+            else:
+                _dict['billing_period'] = self.billing_period.to_dict()
+        if hasattr(self, 'snapshot_id') and self.snapshot_id is not None:
+            _dict['snapshot_id'] = self.snapshot_id
+        if hasattr(self, 'charset') and self.charset is not None:
+            _dict['charset'] = self.charset
+        if hasattr(self, 'compression') and self.compression is not None:
+            _dict['compression'] = self.compression
+        if hasattr(self, 'content_type') and self.content_type is not None:
+            _dict['content_type'] = self.content_type
+        if hasattr(self, 'bucket') and self.bucket is not None:
+            _dict['bucket'] = self.bucket
+        if hasattr(self, 'version') and self.version is not None:
+            _dict['version'] = self.version
+        if hasattr(self, 'created_on') and self.created_on is not None:
+            _dict['created_on'] = self.created_on
+        if hasattr(self, 'report_types') and self.report_types is not None:
+            report_types_list = []
+            for v in self.report_types:
+                if isinstance(v, dict):
+                    report_types_list.append(v)
+                else:
+                    report_types_list.append(v.to_dict())
+            _dict['report_types'] = report_types_list
+        if hasattr(self, 'files') and self.files is not None:
+            files_list = []
+            for v in self.files:
+                if isinstance(v, dict):
+                    files_list.append(v)
+                else:
+                    files_list.append(v.to_dict())
+            _dict['files'] = files_list
+        if hasattr(self, 'processed_at') and self.processed_at is not None:
+            _dict['processed_at'] = self.processed_at
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this SnapshotListSnapshotsItem object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'SnapshotListSnapshotsItem') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'SnapshotListSnapshotsItem') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+    class AccountTypeEnum(str, Enum):
+        """
+        Type of account. Possible values are [enterprise, account].
+        """
+
+        ACCOUNT = 'account'
+        ENTERPRISE = 'enterprise'
+
+
+    class StateEnum(str, Enum):
+        """
+        Status of the billing snapshot configuration. Possible values are [enabled,
+        disabled].
+        """
+
+        ENABLED = 'enabled'
+        DISABLED = 'disabled'
+
+
+
+class SnapshotListSnapshotsItemBillingPeriod:
+    """
+    Period of billing in snapshot.
+
+    :attr str start: (optional) Date and time of start of billing in the respective
+          snapshot.
+    :attr str end: (optional) Date and time of end of billing in the respective
+          snapshot.
+    """
+
+    def __init__(
+        self,
+        *,
+        start: str = None,
+        end: str = None,
+    ) -> None:
+        """
+        Initialize a SnapshotListSnapshotsItemBillingPeriod object.
+
+        :param str start: (optional) Date and time of start of billing in the
+               respective snapshot.
+        :param str end: (optional) Date and time of end of billing in the
+               respective snapshot.
+        """
+        self.start = start
+        self.end = end
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'SnapshotListSnapshotsItemBillingPeriod':
+        """Initialize a SnapshotListSnapshotsItemBillingPeriod object from a json dictionary."""
+        args = {}
+        if 'start' in _dict:
+            args['start'] = _dict.get('start')
+        if 'end' in _dict:
+            args['end'] = _dict.get('end')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a SnapshotListSnapshotsItemBillingPeriod object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'start') and self.start is not None:
+            _dict['start'] = self.start
+        if hasattr(self, 'end') and self.end is not None:
+            _dict['end'] = self.end
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this SnapshotListSnapshotsItemBillingPeriod object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'SnapshotListSnapshotsItemBillingPeriod') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'SnapshotListSnapshotsItemBillingPeriod') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class SnapshotListSnapshotsItemFilesItem:
+    """
+    SnapshotListSnapshotsItemFilesItem.
+
+    :attr str report_types: (optional) The type of billing report stored. Possible
+          values are [account_summary, enterprise_summary,
+          account_resource_instance_usage].
+    :attr str location: (optional) Absolute path of the billing report in the COS
+          instance.
+    :attr str account_id: (optional) Account ID for which billing report is
+          captured.
+    """
+
+    def __init__(
+        self,
+        *,
+        report_types: str = None,
+        location: str = None,
+        account_id: str = None,
+    ) -> None:
+        """
+        Initialize a SnapshotListSnapshotsItemFilesItem object.
+
+        :param str report_types: (optional) The type of billing report stored.
+               Possible values are [account_summary, enterprise_summary,
+               account_resource_instance_usage].
+        :param str location: (optional) Absolute path of the billing report in the
+               COS instance.
+        :param str account_id: (optional) Account ID for which billing report is
+               captured.
+        """
+        self.report_types = report_types
+        self.location = location
+        self.account_id = account_id
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'SnapshotListSnapshotsItemFilesItem':
+        """Initialize a SnapshotListSnapshotsItemFilesItem object from a json dictionary."""
+        args = {}
+        if 'report_types' in _dict:
+            args['report_types'] = _dict.get('report_types')
+        if 'location' in _dict:
+            args['location'] = _dict.get('location')
+        if 'account_id' in _dict:
+            args['account_id'] = _dict.get('account_id')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a SnapshotListSnapshotsItemFilesItem object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'report_types') and self.report_types is not None:
+            _dict['report_types'] = self.report_types
+        if hasattr(self, 'location') and self.location is not None:
+            _dict['location'] = self.location
+        if hasattr(self, 'account_id') and self.account_id is not None:
+            _dict['account_id'] = self.account_id
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this SnapshotListSnapshotsItemFilesItem object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'SnapshotListSnapshotsItemFilesItem') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'SnapshotListSnapshotsItemFilesItem') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+    class ReportTypesEnum(str, Enum):
+        """
+        The type of billing report stored. Possible values are [account_summary,
+        enterprise_summary, account_resource_instance_usage].
+        """
+
+        ACCOUNT_SUMMARY = 'account_summary'
+        ENTERPRISE_SUMMARY = 'enterprise_summary'
+        ACCOUNT_RESOURCE_INSTANCE_USAGE = 'account_resource_instance_usage'
+
+
+
+class SnapshotListSnapshotsItemReportTypesItem:
+    """
+    SnapshotListSnapshotsItemReportTypesItem.
+
+    :attr str type: (optional) The type of billing report of the snapshot. Possible
+          values are [account_summary, enterprise_summary,
+          account_resource_instance_usage].
+    :attr str version: (optional) Version of the snapshot.
+    """
+
+    def __init__(
+        self,
+        *,
+        type: str = None,
+        version: str = None,
+    ) -> None:
+        """
+        Initialize a SnapshotListSnapshotsItemReportTypesItem object.
+
+        :param str type: (optional) The type of billing report of the snapshot.
+               Possible values are [account_summary, enterprise_summary,
+               account_resource_instance_usage].
+        :param str version: (optional) Version of the snapshot.
+        """
+        self.type = type
+        self.version = version
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'SnapshotListSnapshotsItemReportTypesItem':
+        """Initialize a SnapshotListSnapshotsItemReportTypesItem object from a json dictionary."""
+        args = {}
+        if 'type' in _dict:
+            args['type'] = _dict.get('type')
+        if 'version' in _dict:
+            args['version'] = _dict.get('version')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a SnapshotListSnapshotsItemReportTypesItem object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'type') and self.type is not None:
+            _dict['type'] = self.type
+        if hasattr(self, 'version') and self.version is not None:
+            _dict['version'] = self.version
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this SnapshotListSnapshotsItemReportTypesItem object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'SnapshotListSnapshotsItemReportTypesItem') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'SnapshotListSnapshotsItemReportTypesItem') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+    class TypeEnum(str, Enum):
+        """
+        The type of billing report of the snapshot. Possible values are [account_summary,
+        enterprise_summary, account_resource_instance_usage].
+        """
+
+        ACCOUNT_SUMMARY = 'account_summary'
+        ENTERPRISE_SUMMARY = 'enterprise_summary'
+        ACCOUNT_RESOURCE_INSTANCE_USAGE = 'account_resource_instance_usage'
+
+
+
+class SnapshotConfig:
+    """
+    Billing reports snapshot configuration.
+
+    :attr str account_id: (optional) Account ID for which billing report snapshot is
+          configured.
+    :attr str state: (optional) Status of the billing snapshot configuration.
+          Possible values are [enabled, disabled].
+    :attr str account_type: (optional) Type of account. Possible values are
+          [enterprise, account].
+    :attr str interval: (optional) Frequency of taking the snapshot of the billing
+          reports.
+    :attr str versioning: (optional) A new version of report is created or the
+          existing report version is overwritten with every update.
+    :attr List[str] report_types: (optional) The type of billing reports to take
+          snapshot of. Possible values are [account_summary, enterprise_summary,
+          account_resource_instance_usage].
+    :attr str compression: (optional) Compression format of the snapshot report.
+    :attr str content_type: (optional) Type of content stored in snapshot report.
+    :attr str cos_reports_folder: (optional) The billing reports root folder to
+          store the billing reports snapshots. Defaults to "IBMCloud-Billing-Reports".
+    :attr str cos_bucket: (optional) The name of the COS bucket to store the
+          snapshot of the billing reports.
+    :attr str cos_location: (optional) Region of the COS instance.
+    :attr str cos_endpoint: (optional) The endpoint of the COS instance.
+    :attr float created_at: (optional) Timestamp in milliseconds when the snapshot
+          configuration was created.
+    :attr float last_updated_at: (optional) Timestamp in milliseconds when the
+          snapshot configuration was last updated.
+    :attr List[SnapshotConfigHistoryItem] history: (optional) List of previous
+          versions of the snapshot configurations.
+    """
+
+    def __init__(
+        self,
+        *,
+        account_id: str = None,
+        state: str = None,
+        account_type: str = None,
+        interval: str = None,
+        versioning: str = None,
+        report_types: List[str] = None,
+        compression: str = None,
+        content_type: str = None,
+        cos_reports_folder: str = None,
+        cos_bucket: str = None,
+        cos_location: str = None,
+        cos_endpoint: str = None,
+        created_at: float = None,
+        last_updated_at: float = None,
+        history: List['SnapshotConfigHistoryItem'] = None,
+    ) -> None:
+        """
+        Initialize a SnapshotConfig object.
+
+        :param str account_id: (optional) Account ID for which billing report
+               snapshot is configured.
+        :param str state: (optional) Status of the billing snapshot configuration.
+               Possible values are [enabled, disabled].
+        :param str account_type: (optional) Type of account. Possible values are
+               [enterprise, account].
+        :param str interval: (optional) Frequency of taking the snapshot of the
+               billing reports.
+        :param str versioning: (optional) A new version of report is created or the
+               existing report version is overwritten with every update.
+        :param List[str] report_types: (optional) The type of billing reports to
+               take snapshot of. Possible values are [account_summary, enterprise_summary,
+               account_resource_instance_usage].
+        :param str compression: (optional) Compression format of the snapshot
+               report.
+        :param str content_type: (optional) Type of content stored in snapshot
+               report.
+        :param str cos_reports_folder: (optional) The billing reports root folder
+               to store the billing reports snapshots. Defaults to
+               "IBMCloud-Billing-Reports".
+        :param str cos_bucket: (optional) The name of the COS bucket to store the
+               snapshot of the billing reports.
+        :param str cos_location: (optional) Region of the COS instance.
+        :param str cos_endpoint: (optional) The endpoint of the COS instance.
+        :param float created_at: (optional) Timestamp in milliseconds when the
+               snapshot configuration was created.
+        :param float last_updated_at: (optional) Timestamp in milliseconds when the
+               snapshot configuration was last updated.
+        :param List[SnapshotConfigHistoryItem] history: (optional) List of previous
+               versions of the snapshot configurations.
+        """
+        self.account_id = account_id
+        self.state = state
+        self.account_type = account_type
+        self.interval = interval
+        self.versioning = versioning
+        self.report_types = report_types
+        self.compression = compression
+        self.content_type = content_type
+        self.cos_reports_folder = cos_reports_folder
+        self.cos_bucket = cos_bucket
+        self.cos_location = cos_location
+        self.cos_endpoint = cos_endpoint
+        self.created_at = created_at
+        self.last_updated_at = last_updated_at
+        self.history = history
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'SnapshotConfig':
+        """Initialize a SnapshotConfig object from a json dictionary."""
+        args = {}
+        if 'account_id' in _dict:
+            args['account_id'] = _dict.get('account_id')
+        if 'state' in _dict:
+            args['state'] = _dict.get('state')
+        if 'account_type' in _dict:
+            args['account_type'] = _dict.get('account_type')
+        if 'interval' in _dict:
+            args['interval'] = _dict.get('interval')
+        if 'versioning' in _dict:
+            args['versioning'] = _dict.get('versioning')
+        if 'report_types' in _dict:
+            args['report_types'] = _dict.get('report_types')
+        if 'compression' in _dict:
+            args['compression'] = _dict.get('compression')
+        if 'content_type' in _dict:
+            args['content_type'] = _dict.get('content_type')
+        if 'cos_reports_folder' in _dict:
+            args['cos_reports_folder'] = _dict.get('cos_reports_folder')
+        if 'cos_bucket' in _dict:
+            args['cos_bucket'] = _dict.get('cos_bucket')
+        if 'cos_location' in _dict:
+            args['cos_location'] = _dict.get('cos_location')
+        if 'cos_endpoint' in _dict:
+            args['cos_endpoint'] = _dict.get('cos_endpoint')
+        if 'created_at' in _dict:
+            args['created_at'] = _dict.get('created_at')
+        if 'last_updated_at' in _dict:
+            args['last_updated_at'] = _dict.get('last_updated_at')
+        if 'history' in _dict:
+            args['history'] = [SnapshotConfigHistoryItem.from_dict(v) for v in _dict.get('history')]
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a SnapshotConfig object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'account_id') and self.account_id is not None:
+            _dict['account_id'] = self.account_id
+        if hasattr(self, 'state') and self.state is not None:
+            _dict['state'] = self.state
+        if hasattr(self, 'account_type') and self.account_type is not None:
+            _dict['account_type'] = self.account_type
+        if hasattr(self, 'interval') and self.interval is not None:
+            _dict['interval'] = self.interval
+        if hasattr(self, 'versioning') and self.versioning is not None:
+            _dict['versioning'] = self.versioning
+        if hasattr(self, 'report_types') and self.report_types is not None:
+            _dict['report_types'] = self.report_types
+        if hasattr(self, 'compression') and self.compression is not None:
+            _dict['compression'] = self.compression
+        if hasattr(self, 'content_type') and self.content_type is not None:
+            _dict['content_type'] = self.content_type
+        if hasattr(self, 'cos_reports_folder') and self.cos_reports_folder is not None:
+            _dict['cos_reports_folder'] = self.cos_reports_folder
+        if hasattr(self, 'cos_bucket') and self.cos_bucket is not None:
+            _dict['cos_bucket'] = self.cos_bucket
+        if hasattr(self, 'cos_location') and self.cos_location is not None:
+            _dict['cos_location'] = self.cos_location
+        if hasattr(self, 'cos_endpoint') and self.cos_endpoint is not None:
+            _dict['cos_endpoint'] = self.cos_endpoint
+        if hasattr(self, 'created_at') and self.created_at is not None:
+            _dict['created_at'] = self.created_at
+        if hasattr(self, 'last_updated_at') and self.last_updated_at is not None:
+            _dict['last_updated_at'] = self.last_updated_at
+        if hasattr(self, 'history') and self.history is not None:
+            history_list = []
+            for v in self.history:
+                if isinstance(v, dict):
+                    history_list.append(v)
+                else:
+                    history_list.append(v.to_dict())
+            _dict['history'] = history_list
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this SnapshotConfig object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'SnapshotConfig') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'SnapshotConfig') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+    class StateEnum(str, Enum):
+        """
+        Status of the billing snapshot configuration. Possible values are [enabled,
+        disabled].
+        """
+
+        ENABLED = 'enabled'
+        DISABLED = 'disabled'
+
+
+    class AccountTypeEnum(str, Enum):
+        """
+        Type of account. Possible values are [enterprise, account].
+        """
+
+        ACCOUNT = 'account'
+        ENTERPRISE = 'enterprise'
+
+
+    class IntervalEnum(str, Enum):
+        """
+        Frequency of taking the snapshot of the billing reports.
+        """
+
+        DAILY = 'daily'
+
+
+    class VersioningEnum(str, Enum):
+        """
+        A new version of report is created or the existing report version is overwritten
+        with every update.
+        """
+
+        NEW = 'new'
+        OVERWRITE = 'overwrite'
+
+
+    class ReportTypesEnum(str, Enum):
+        """
+        report_types.
+        """
+
+        ACCOUNT_SUMMARY = 'account_summary'
+        ENTERPRISE_SUMMARY = 'enterprise_summary'
+        ACCOUNT_RESOURCE_INSTANCE_USAGE = 'account_resource_instance_usage'
+
 
 
 class Subscription:
@@ -2581,7 +4196,12 @@ class SubscriptionSummary:
           applicable for the month.
     """
 
-    def __init__(self, *, overage: float = None, subscriptions: List['Subscription'] = None) -> None:
+    def __init__(
+        self,
+        *,
+        overage: float = None,
+        subscriptions: List['Subscription'] = None,
+    ) -> None:
         """
         Initialize a SubscriptionSummary object.
 
@@ -2652,7 +4272,12 @@ class SubscriptionTerm:
           subscription.
     """
 
-    def __init__(self, start: datetime, end: datetime, credits: 'SubscriptionTermCredits') -> None:
+    def __init__(
+        self,
+        start: datetime,
+        end: datetime,
+        credits: 'SubscriptionTermCredits',
+    ) -> None:
         """
         Initialize a SubscriptionTerm object.
 
@@ -2732,7 +4357,13 @@ class SubscriptionTermCredits:
     :attr float balance: The remaining credits in this term.
     """
 
-    def __init__(self, total: float, starting_balance: float, used: float, balance: float) -> None:
+    def __init__(
+        self,
+        total: float,
+        starting_balance: float,
+        used: float,
+        balance: float,
+    ) -> None:
         """
         Initialize a SubscriptionTermCredits object.
 
@@ -2815,7 +4446,12 @@ class SupportSummary:
     :attr float overage: Additional support cost for the month.
     """
 
-    def __init__(self, cost: float, type: str, overage: float) -> None:
+    def __init__(
+        self,
+        cost: float,
+        type: str,
+        overage: float,
+    ) -> None:
         """
         Initialize a SupportSummary object.
 
@@ -2879,7 +4515,6 @@ class SupportSummary:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-
 ##############################################################################
 # Pagers
 ##############################################################################
@@ -2897,6 +4532,7 @@ class GetResourceUsageAccountPager:
         account_id: str,
         billingmonth: str,
         names: bool = None,
+        tags: bool = None,
         accept_language: str = None,
         limit: int = None,
         resource_group_id: str = None,
@@ -2913,6 +4549,8 @@ class GetResourceUsageAccountPager:
                requested.  Format is yyyy-mm.
         :param bool names: (optional) Include the name of every resource, plan,
                resource instance, organization, and resource group.
+        :param bool tags: (optional) Include the user tags associated with every
+               resource instance. By default it is always `true`.
         :param str accept_language: (optional) Prioritize the names returned in the
                order of the specified languages. Language will default to English.
         :param int limit: (optional) Number of usage records returned. The default
@@ -2931,6 +4569,7 @@ class GetResourceUsageAccountPager:
         self._account_id = account_id
         self._billingmonth = billingmonth
         self._names = names
+        self._tags = tags
         self._accept_language = accept_language
         self._limit = limit
         self._resource_group_id = resource_group_id
@@ -2959,6 +4598,7 @@ class GetResourceUsageAccountPager:
             account_id=self._account_id,
             billingmonth=self._billingmonth,
             names=self._names,
+            tags=self._tags,
             accept_language=self._accept_language,
             limit=self._limit,
             resource_group_id=self._resource_group_id,
@@ -3007,6 +4647,7 @@ class GetResourceUsageResourceGroupPager:
         resource_group_id: str,
         billingmonth: str,
         names: bool = None,
+        tags: bool = None,
         accept_language: str = None,
         limit: int = None,
         resource_instance_id: str = None,
@@ -3023,6 +4664,8 @@ class GetResourceUsageResourceGroupPager:
                requested.  Format is yyyy-mm.
         :param bool names: (optional) Include the name of every resource, plan,
                resource instance, organization, and resource group.
+        :param bool tags: (optional) Include the user tags associated with every
+               resource instance. By default it is always `true`.
         :param str accept_language: (optional) Prioritize the names returned in the
                order of the specified languages. Language will default to English.
         :param int limit: (optional) Number of usage records returned. The default
@@ -3040,6 +4683,7 @@ class GetResourceUsageResourceGroupPager:
         self._resource_group_id = resource_group_id
         self._billingmonth = billingmonth
         self._names = names
+        self._tags = tags
         self._accept_language = accept_language
         self._limit = limit
         self._resource_instance_id = resource_instance_id
@@ -3067,6 +4711,7 @@ class GetResourceUsageResourceGroupPager:
             resource_group_id=self._resource_group_id,
             billingmonth=self._billingmonth,
             names=self._names,
+            tags=self._tags,
             accept_language=self._accept_language,
             limit=self._limit,
             resource_instance_id=self._resource_instance_id,
@@ -3113,6 +4758,7 @@ class GetResourceUsageOrgPager:
         organization_id: str,
         billingmonth: str,
         names: bool = None,
+        tags: bool = None,
         accept_language: str = None,
         limit: int = None,
         resource_instance_id: str = None,
@@ -3128,6 +4774,8 @@ class GetResourceUsageOrgPager:
                requested.  Format is yyyy-mm.
         :param bool names: (optional) Include the name of every resource, plan,
                resource instance, organization, and resource group.
+        :param bool tags: (optional) Include the user tags associated with every
+               resource instance. By default it is always `true`.
         :param str accept_language: (optional) Prioritize the names returned in the
                order of the specified languages. Language will default to English.
         :param int limit: (optional) Number of usage records returned. The default
@@ -3145,6 +4793,7 @@ class GetResourceUsageOrgPager:
         self._organization_id = organization_id
         self._billingmonth = billingmonth
         self._names = names
+        self._tags = tags
         self._accept_language = accept_language
         self._limit = limit
         self._resource_instance_id = resource_instance_id
@@ -3172,6 +4821,7 @@ class GetResourceUsageOrgPager:
             organization_id=self._organization_id,
             billingmonth=self._billingmonth,
             names=self._names,
+            tags=self._tags,
             accept_language=self._accept_language,
             limit=self._limit,
             resource_instance_id=self._resource_instance_id,

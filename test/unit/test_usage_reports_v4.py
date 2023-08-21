@@ -31,7 +31,9 @@ import urllib
 from ibm_platform_services.usage_reports_v4 import *
 
 
-_service = UsageReportsV4(authenticator=NoAuthAuthenticator())
+_service = UsageReportsV4(
+    authenticator=NoAuthAuthenticator()
+)
 
 _base_url = 'https://billing.cloud.ibm.com'
 _service.set_service_url(_base_url)
@@ -110,14 +112,24 @@ class TestGetAccountSummary:
         # Set up mock
         url = preprocess_url('/v4/accounts/testString/summary/testString')
         mock_response = '{"account_id": "account_id", "account_resources": [{"resource_id": "resource_id", "resource_name": "resource_name", "billable_cost": 13, "billable_rated_cost": 19, "non_billable_cost": 17, "non_billable_rated_cost": 23, "plans": [{"plan_id": "plan_id", "plan_name": "plan_name", "pricing_region": "pricing_region", "pricing_plan_id": "pricing_plan_id", "billable": true, "cost": 4, "rated_cost": 10, "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}], "pending": true}], "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "month": "month", "billing_country_code": "billing_country_code", "billing_currency_code": "billing_currency_code", "resources": {"billable_cost": 13, "non_billable_cost": 17}, "offers": [{"offer_id": "offer_id", "credits_total": 13, "offer_template": "offer_template", "valid_from": "2019-01-01T12:00:00.000Z", "expires_on": "2019-01-01T12:00:00.000Z", "credits": {"starting_balance": 16, "used": 4, "balance": 7}}], "support": [{"cost": 4, "type": "type", "overage": 7}], "support_resources": ["anyValue"], "subscription": {"overage": 7, "subscriptions": [{"subscription_id": "subscription_id", "charge_agreement_number": "charge_agreement_number", "type": "type", "subscription_amount": 19, "start": "2019-01-01T12:00:00.000Z", "end": "2019-01-01T12:00:00.000Z", "credits_total": 13, "terms": [{"start": "2019-01-01T12:00:00.000Z", "end": "2019-01-01T12:00:00.000Z", "credits": {"total": 5, "starting_balance": 16, "used": 4, "balance": 7}}]}]}}'
-        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
 
         # Set up parameter values
         account_id = 'testString'
         billingmonth = 'testString'
 
         # Invoke method
-        response = _service.get_account_summary(account_id, billingmonth, headers={})
+        response = _service.get_account_summary(
+            account_id,
+            billingmonth,
+            headers={},
+        )
 
         # Check for correct operation
         assert len(responses.calls) == 1
@@ -140,7 +152,13 @@ class TestGetAccountSummary:
         # Set up mock
         url = preprocess_url('/v4/accounts/testString/summary/testString')
         mock_response = '{"account_id": "account_id", "account_resources": [{"resource_id": "resource_id", "resource_name": "resource_name", "billable_cost": 13, "billable_rated_cost": 19, "non_billable_cost": 17, "non_billable_rated_cost": 23, "plans": [{"plan_id": "plan_id", "plan_name": "plan_name", "pricing_region": "pricing_region", "pricing_plan_id": "pricing_plan_id", "billable": true, "cost": 4, "rated_cost": 10, "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}], "pending": true}], "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "month": "month", "billing_country_code": "billing_country_code", "billing_currency_code": "billing_currency_code", "resources": {"billable_cost": 13, "non_billable_cost": 17}, "offers": [{"offer_id": "offer_id", "credits_total": 13, "offer_template": "offer_template", "valid_from": "2019-01-01T12:00:00.000Z", "expires_on": "2019-01-01T12:00:00.000Z", "credits": {"starting_balance": 16, "used": 4, "balance": 7}}], "support": [{"cost": 4, "type": "type", "overage": 7}], "support_resources": ["anyValue"], "subscription": {"overage": 7, "subscriptions": [{"subscription_id": "subscription_id", "charge_agreement_number": "charge_agreement_number", "type": "type", "subscription_amount": 19, "start": "2019-01-01T12:00:00.000Z", "end": "2019-01-01T12:00:00.000Z", "credits_total": 13, "terms": [{"start": "2019-01-01T12:00:00.000Z", "end": "2019-01-01T12:00:00.000Z", "credits": {"total": 5, "starting_balance": 16, "used": 4, "balance": 7}}]}]}}'
-        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
 
         # Set up parameter values
         account_id = 'testString'
@@ -179,7 +197,13 @@ class TestGetAccountUsage:
         # Set up mock
         url = preprocess_url('/v4/accounts/testString/usage/testString')
         mock_response = '{"account_id": "account_id", "pricing_country": "USA", "currency_code": "USD", "month": "2017-08", "resources": [{"resource_id": "resource_id", "resource_name": "resource_name", "billable_cost": 13, "billable_rated_cost": 19, "non_billable_cost": 17, "non_billable_rated_cost": 23, "plans": [{"plan_id": "plan_id", "plan_name": "plan_name", "pricing_region": "pricing_region", "pricing_plan_id": "pricing_plan_id", "billable": true, "cost": 4, "rated_cost": 10, "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}], "pending": true}], "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "currency_rate": 10.8716}'
-        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
 
         # Set up parameter values
         account_id = 'testString'
@@ -189,7 +213,11 @@ class TestGetAccountUsage:
 
         # Invoke method
         response = _service.get_account_usage(
-            account_id, billingmonth, names=names, accept_language=accept_language, headers={}
+            account_id,
+            billingmonth,
+            names=names,
+            accept_language=accept_language,
+            headers={},
         )
 
         # Check for correct operation
@@ -217,14 +245,24 @@ class TestGetAccountUsage:
         # Set up mock
         url = preprocess_url('/v4/accounts/testString/usage/testString')
         mock_response = '{"account_id": "account_id", "pricing_country": "USA", "currency_code": "USD", "month": "2017-08", "resources": [{"resource_id": "resource_id", "resource_name": "resource_name", "billable_cost": 13, "billable_rated_cost": 19, "non_billable_cost": 17, "non_billable_rated_cost": 23, "plans": [{"plan_id": "plan_id", "plan_name": "plan_name", "pricing_region": "pricing_region", "pricing_plan_id": "pricing_plan_id", "billable": true, "cost": 4, "rated_cost": 10, "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}], "pending": true}], "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "currency_rate": 10.8716}'
-        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
 
         # Set up parameter values
         account_id = 'testString'
         billingmonth = 'testString'
 
         # Invoke method
-        response = _service.get_account_usage(account_id, billingmonth, headers={})
+        response = _service.get_account_usage(
+            account_id,
+            billingmonth,
+            headers={},
+        )
 
         # Check for correct operation
         assert len(responses.calls) == 1
@@ -247,7 +285,13 @@ class TestGetAccountUsage:
         # Set up mock
         url = preprocess_url('/v4/accounts/testString/usage/testString')
         mock_response = '{"account_id": "account_id", "pricing_country": "USA", "currency_code": "USD", "month": "2017-08", "resources": [{"resource_id": "resource_id", "resource_name": "resource_name", "billable_cost": 13, "billable_rated_cost": 19, "non_billable_cost": 17, "non_billable_rated_cost": 23, "plans": [{"plan_id": "plan_id", "plan_name": "plan_name", "pricing_region": "pricing_region", "pricing_plan_id": "pricing_plan_id", "billable": true, "cost": 4, "rated_cost": 10, "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}], "pending": true}], "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "currency_rate": 10.8716}'
-        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
 
         # Set up parameter values
         account_id = 'testString'
@@ -325,7 +369,13 @@ class TestGetResourceGroupUsage:
         # Set up mock
         url = preprocess_url('/v4/accounts/testString/resource_groups/testString/usage/testString')
         mock_response = '{"account_id": "account_id", "resource_group_id": "resource_group_id", "resource_group_name": "resource_group_name", "pricing_country": "USA", "currency_code": "USD", "month": "2017-08", "resources": [{"resource_id": "resource_id", "resource_name": "resource_name", "billable_cost": 13, "billable_rated_cost": 19, "non_billable_cost": 17, "non_billable_rated_cost": 23, "plans": [{"plan_id": "plan_id", "plan_name": "plan_name", "pricing_region": "pricing_region", "pricing_plan_id": "pricing_plan_id", "billable": true, "cost": 4, "rated_cost": 10, "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}], "pending": true}], "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "currency_rate": 10.8716}'
-        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
 
         # Set up parameter values
         account_id = 'testString'
@@ -336,7 +386,12 @@ class TestGetResourceGroupUsage:
 
         # Invoke method
         response = _service.get_resource_group_usage(
-            account_id, resource_group_id, billingmonth, names=names, accept_language=accept_language, headers={}
+            account_id,
+            resource_group_id,
+            billingmonth,
+            names=names,
+            accept_language=accept_language,
+            headers={},
         )
 
         # Check for correct operation
@@ -364,7 +419,13 @@ class TestGetResourceGroupUsage:
         # Set up mock
         url = preprocess_url('/v4/accounts/testString/resource_groups/testString/usage/testString')
         mock_response = '{"account_id": "account_id", "resource_group_id": "resource_group_id", "resource_group_name": "resource_group_name", "pricing_country": "USA", "currency_code": "USD", "month": "2017-08", "resources": [{"resource_id": "resource_id", "resource_name": "resource_name", "billable_cost": 13, "billable_rated_cost": 19, "non_billable_cost": 17, "non_billable_rated_cost": 23, "plans": [{"plan_id": "plan_id", "plan_name": "plan_name", "pricing_region": "pricing_region", "pricing_plan_id": "pricing_plan_id", "billable": true, "cost": 4, "rated_cost": 10, "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}], "pending": true}], "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "currency_rate": 10.8716}'
-        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
 
         # Set up parameter values
         account_id = 'testString'
@@ -372,7 +433,12 @@ class TestGetResourceGroupUsage:
         billingmonth = 'testString'
 
         # Invoke method
-        response = _service.get_resource_group_usage(account_id, resource_group_id, billingmonth, headers={})
+        response = _service.get_resource_group_usage(
+            account_id,
+            resource_group_id,
+            billingmonth,
+            headers={},
+        )
 
         # Check for correct operation
         assert len(responses.calls) == 1
@@ -395,7 +461,13 @@ class TestGetResourceGroupUsage:
         # Set up mock
         url = preprocess_url('/v4/accounts/testString/resource_groups/testString/usage/testString')
         mock_response = '{"account_id": "account_id", "resource_group_id": "resource_group_id", "resource_group_name": "resource_group_name", "pricing_country": "USA", "currency_code": "USD", "month": "2017-08", "resources": [{"resource_id": "resource_id", "resource_name": "resource_name", "billable_cost": 13, "billable_rated_cost": 19, "non_billable_cost": 17, "non_billable_rated_cost": 23, "plans": [{"plan_id": "plan_id", "plan_name": "plan_name", "pricing_region": "pricing_region", "pricing_plan_id": "pricing_plan_id", "billable": true, "cost": 4, "rated_cost": 10, "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}], "pending": true}], "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "currency_rate": 10.8716}'
-        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
 
         # Set up parameter values
         account_id = 'testString'
@@ -435,15 +507,22 @@ class TestGetResourceUsageAccount:
         """
         # Set up mock
         url = preprocess_url('/v4/accounts/testString/resource_instances/usage/testString')
-        mock_response = '{"limit": 5, "count": 5, "first": {"href": "href"}, "next": {"href": "href", "offset": "offset"}, "resources": [{"account_id": "account_id", "resource_instance_id": "resource_instance_id", "resource_instance_name": "resource_instance_name", "resource_id": "resource_id", "resource_name": "resource_name", "resource_group_id": "resource_group_id", "resource_group_name": "resource_group_name", "organization_id": "organization_id", "organization_name": "organization_name", "space_id": "space_id", "space_name": "space_name", "consumer_id": "consumer_id", "region": "region", "pricing_region": "pricing_region", "pricing_country": "USA", "currency_code": "USD", "billable": true, "plan_id": "plan_id", "plan_name": "plan_name", "month": "2017-08", "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "pending": true, "currency_rate": 10.8716}]}'
-        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
+        mock_response = '{"limit": 5, "count": 5, "first": {"href": "href"}, "next": {"href": "href", "offset": "offset"}, "resources": [{"account_id": "account_id", "resource_instance_id": "resource_instance_id", "resource_instance_name": "resource_instance_name", "resource_id": "resource_id", "resource_name": "resource_name", "resource_group_id": "resource_group_id", "resource_group_name": "resource_group_name", "organization_id": "organization_id", "organization_name": "organization_name", "space_id": "space_id", "space_name": "space_name", "consumer_id": "consumer_id", "region": "region", "pricing_region": "pricing_region", "pricing_country": "USA", "currency_code": "USD", "billable": true, "plan_id": "plan_id", "plan_name": "plan_name", "pricing_plan_id": "pricing_plan_id", "month": "2017-08", "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "pending": true, "currency_rate": 10.8716, "tags": ["anyValue"]}]}'
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
 
         # Set up parameter values
         account_id = 'testString'
         billingmonth = 'testString'
         names = True
+        tags = True
         accept_language = 'testString'
-        limit = 1
+        limit = 30
         start = 'testString'
         resource_group_id = 'testString'
         organization_id = 'testString'
@@ -457,6 +536,7 @@ class TestGetResourceUsageAccount:
             account_id,
             billingmonth,
             names=names,
+            tags=tags,
             accept_language=accept_language,
             limit=limit,
             start=start,
@@ -476,6 +556,7 @@ class TestGetResourceUsageAccount:
         query_string = responses.calls[0].request.url.split('?', 1)[1]
         query_string = urllib.parse.unquote_plus(query_string)
         assert '_names={}'.format('true' if names else 'false') in query_string
+        assert '_tags={}'.format('true' if tags else 'false') in query_string
         assert '_limit={}'.format(limit) in query_string
         assert '_start={}'.format(start) in query_string
         assert 'resource_group_id={}'.format(resource_group_id) in query_string
@@ -501,15 +582,25 @@ class TestGetResourceUsageAccount:
         """
         # Set up mock
         url = preprocess_url('/v4/accounts/testString/resource_instances/usage/testString')
-        mock_response = '{"limit": 5, "count": 5, "first": {"href": "href"}, "next": {"href": "href", "offset": "offset"}, "resources": [{"account_id": "account_id", "resource_instance_id": "resource_instance_id", "resource_instance_name": "resource_instance_name", "resource_id": "resource_id", "resource_name": "resource_name", "resource_group_id": "resource_group_id", "resource_group_name": "resource_group_name", "organization_id": "organization_id", "organization_name": "organization_name", "space_id": "space_id", "space_name": "space_name", "consumer_id": "consumer_id", "region": "region", "pricing_region": "pricing_region", "pricing_country": "USA", "currency_code": "USD", "billable": true, "plan_id": "plan_id", "plan_name": "plan_name", "month": "2017-08", "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "pending": true, "currency_rate": 10.8716}]}'
-        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
+        mock_response = '{"limit": 5, "count": 5, "first": {"href": "href"}, "next": {"href": "href", "offset": "offset"}, "resources": [{"account_id": "account_id", "resource_instance_id": "resource_instance_id", "resource_instance_name": "resource_instance_name", "resource_id": "resource_id", "resource_name": "resource_name", "resource_group_id": "resource_group_id", "resource_group_name": "resource_group_name", "organization_id": "organization_id", "organization_name": "organization_name", "space_id": "space_id", "space_name": "space_name", "consumer_id": "consumer_id", "region": "region", "pricing_region": "pricing_region", "pricing_country": "USA", "currency_code": "USD", "billable": true, "plan_id": "plan_id", "plan_name": "plan_name", "pricing_plan_id": "pricing_plan_id", "month": "2017-08", "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "pending": true, "currency_rate": 10.8716, "tags": ["anyValue"]}]}'
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
 
         # Set up parameter values
         account_id = 'testString'
         billingmonth = 'testString'
 
         # Invoke method
-        response = _service.get_resource_usage_account(account_id, billingmonth, headers={})
+        response = _service.get_resource_usage_account(
+            account_id,
+            billingmonth,
+            headers={},
+        )
 
         # Check for correct operation
         assert len(responses.calls) == 1
@@ -531,8 +622,14 @@ class TestGetResourceUsageAccount:
         """
         # Set up mock
         url = preprocess_url('/v4/accounts/testString/resource_instances/usage/testString')
-        mock_response = '{"limit": 5, "count": 5, "first": {"href": "href"}, "next": {"href": "href", "offset": "offset"}, "resources": [{"account_id": "account_id", "resource_instance_id": "resource_instance_id", "resource_instance_name": "resource_instance_name", "resource_id": "resource_id", "resource_name": "resource_name", "resource_group_id": "resource_group_id", "resource_group_name": "resource_group_name", "organization_id": "organization_id", "organization_name": "organization_name", "space_id": "space_id", "space_name": "space_name", "consumer_id": "consumer_id", "region": "region", "pricing_region": "pricing_region", "pricing_country": "USA", "currency_code": "USD", "billable": true, "plan_id": "plan_id", "plan_name": "plan_name", "month": "2017-08", "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "pending": true, "currency_rate": 10.8716}]}'
-        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
+        mock_response = '{"limit": 5, "count": 5, "first": {"href": "href"}, "next": {"href": "href", "offset": "offset"}, "resources": [{"account_id": "account_id", "resource_instance_id": "resource_instance_id", "resource_instance_name": "resource_instance_name", "resource_id": "resource_id", "resource_name": "resource_name", "resource_group_id": "resource_group_id", "resource_group_name": "resource_group_name", "organization_id": "organization_id", "organization_name": "organization_name", "space_id": "space_id", "space_name": "space_name", "consumer_id": "consumer_id", "region": "region", "pricing_region": "pricing_region", "pricing_country": "USA", "currency_code": "USD", "billable": true, "plan_id": "plan_id", "plan_name": "plan_name", "pricing_plan_id": "pricing_plan_id", "month": "2017-08", "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "pending": true, "currency_rate": 10.8716, "tags": ["anyValue"]}]}'
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
 
         # Set up parameter values
         account_id = 'testString'
@@ -564,10 +661,22 @@ class TestGetResourceUsageAccount:
         """
         # Set up a two-page mock response
         url = preprocess_url('/v4/accounts/testString/resource_instances/usage/testString')
-        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?_start=1"},"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716}]}'
-        mock_response2 = '{"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716}]}'
-        responses.add(responses.GET, url, body=mock_response1, content_type='application/json', status=200)
-        responses.add(responses.GET, url, body=mock_response2, content_type='application/json', status=200)
+        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?_start=1"},"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","pricing_plan_id":"pricing_plan_id","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716,"tags":["anyValue"]}]}'
+        mock_response2 = '{"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","pricing_plan_id":"pricing_plan_id","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716,"tags":["anyValue"]}]}'
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response1,
+            content_type='application/json',
+            status=200,
+        )
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response2,
+            content_type='application/json',
+            status=200,
+        )
 
         # Exercise the pager class for this operation
         all_results = []
@@ -576,8 +685,9 @@ class TestGetResourceUsageAccount:
             account_id='testString',
             billingmonth='testString',
             names=True,
+            tags=True,
             accept_language='testString',
-            limit=1,
+            limit=30,
             resource_group_id='testString',
             organization_id='testString',
             resource_instance_id='testString',
@@ -598,10 +708,22 @@ class TestGetResourceUsageAccount:
         """
         # Set up a two-page mock response
         url = preprocess_url('/v4/accounts/testString/resource_instances/usage/testString')
-        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?_start=1"},"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716}]}'
-        mock_response2 = '{"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716}]}'
-        responses.add(responses.GET, url, body=mock_response1, content_type='application/json', status=200)
-        responses.add(responses.GET, url, body=mock_response2, content_type='application/json', status=200)
+        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?_start=1"},"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","pricing_plan_id":"pricing_plan_id","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716,"tags":["anyValue"]}]}'
+        mock_response2 = '{"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","pricing_plan_id":"pricing_plan_id","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716,"tags":["anyValue"]}]}'
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response1,
+            content_type='application/json',
+            status=200,
+        )
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response2,
+            content_type='application/json',
+            status=200,
+        )
 
         # Exercise the pager class for this operation
         pager = GetResourceUsageAccountPager(
@@ -609,8 +731,9 @@ class TestGetResourceUsageAccount:
             account_id='testString',
             billingmonth='testString',
             names=True,
+            tags=True,
             accept_language='testString',
-            limit=1,
+            limit=30,
             resource_group_id='testString',
             organization_id='testString',
             resource_instance_id='testString',
@@ -635,16 +758,23 @@ class TestGetResourceUsageResourceGroup:
         """
         # Set up mock
         url = preprocess_url('/v4/accounts/testString/resource_groups/testString/resource_instances/usage/testString')
-        mock_response = '{"limit": 5, "count": 5, "first": {"href": "href"}, "next": {"href": "href", "offset": "offset"}, "resources": [{"account_id": "account_id", "resource_instance_id": "resource_instance_id", "resource_instance_name": "resource_instance_name", "resource_id": "resource_id", "resource_name": "resource_name", "resource_group_id": "resource_group_id", "resource_group_name": "resource_group_name", "organization_id": "organization_id", "organization_name": "organization_name", "space_id": "space_id", "space_name": "space_name", "consumer_id": "consumer_id", "region": "region", "pricing_region": "pricing_region", "pricing_country": "USA", "currency_code": "USD", "billable": true, "plan_id": "plan_id", "plan_name": "plan_name", "month": "2017-08", "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "pending": true, "currency_rate": 10.8716}]}'
-        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
+        mock_response = '{"limit": 5, "count": 5, "first": {"href": "href"}, "next": {"href": "href", "offset": "offset"}, "resources": [{"account_id": "account_id", "resource_instance_id": "resource_instance_id", "resource_instance_name": "resource_instance_name", "resource_id": "resource_id", "resource_name": "resource_name", "resource_group_id": "resource_group_id", "resource_group_name": "resource_group_name", "organization_id": "organization_id", "organization_name": "organization_name", "space_id": "space_id", "space_name": "space_name", "consumer_id": "consumer_id", "region": "region", "pricing_region": "pricing_region", "pricing_country": "USA", "currency_code": "USD", "billable": true, "plan_id": "plan_id", "plan_name": "plan_name", "pricing_plan_id": "pricing_plan_id", "month": "2017-08", "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "pending": true, "currency_rate": 10.8716, "tags": ["anyValue"]}]}'
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
 
         # Set up parameter values
         account_id = 'testString'
         resource_group_id = 'testString'
         billingmonth = 'testString'
         names = True
+        tags = True
         accept_language = 'testString'
-        limit = 1
+        limit = 30
         start = 'testString'
         resource_instance_id = 'testString'
         resource_id = 'testString'
@@ -657,6 +787,7 @@ class TestGetResourceUsageResourceGroup:
             resource_group_id,
             billingmonth,
             names=names,
+            tags=tags,
             accept_language=accept_language,
             limit=limit,
             start=start,
@@ -674,6 +805,7 @@ class TestGetResourceUsageResourceGroup:
         query_string = responses.calls[0].request.url.split('?', 1)[1]
         query_string = urllib.parse.unquote_plus(query_string)
         assert '_names={}'.format('true' if names else 'false') in query_string
+        assert '_tags={}'.format('true' if tags else 'false') in query_string
         assert '_limit={}'.format(limit) in query_string
         assert '_start={}'.format(start) in query_string
         assert 'resource_instance_id={}'.format(resource_instance_id) in query_string
@@ -697,8 +829,14 @@ class TestGetResourceUsageResourceGroup:
         """
         # Set up mock
         url = preprocess_url('/v4/accounts/testString/resource_groups/testString/resource_instances/usage/testString')
-        mock_response = '{"limit": 5, "count": 5, "first": {"href": "href"}, "next": {"href": "href", "offset": "offset"}, "resources": [{"account_id": "account_id", "resource_instance_id": "resource_instance_id", "resource_instance_name": "resource_instance_name", "resource_id": "resource_id", "resource_name": "resource_name", "resource_group_id": "resource_group_id", "resource_group_name": "resource_group_name", "organization_id": "organization_id", "organization_name": "organization_name", "space_id": "space_id", "space_name": "space_name", "consumer_id": "consumer_id", "region": "region", "pricing_region": "pricing_region", "pricing_country": "USA", "currency_code": "USD", "billable": true, "plan_id": "plan_id", "plan_name": "plan_name", "month": "2017-08", "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "pending": true, "currency_rate": 10.8716}]}'
-        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
+        mock_response = '{"limit": 5, "count": 5, "first": {"href": "href"}, "next": {"href": "href", "offset": "offset"}, "resources": [{"account_id": "account_id", "resource_instance_id": "resource_instance_id", "resource_instance_name": "resource_instance_name", "resource_id": "resource_id", "resource_name": "resource_name", "resource_group_id": "resource_group_id", "resource_group_name": "resource_group_name", "organization_id": "organization_id", "organization_name": "organization_name", "space_id": "space_id", "space_name": "space_name", "consumer_id": "consumer_id", "region": "region", "pricing_region": "pricing_region", "pricing_country": "USA", "currency_code": "USD", "billable": true, "plan_id": "plan_id", "plan_name": "plan_name", "pricing_plan_id": "pricing_plan_id", "month": "2017-08", "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "pending": true, "currency_rate": 10.8716, "tags": ["anyValue"]}]}'
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
 
         # Set up parameter values
         account_id = 'testString'
@@ -706,7 +844,12 @@ class TestGetResourceUsageResourceGroup:
         billingmonth = 'testString'
 
         # Invoke method
-        response = _service.get_resource_usage_resource_group(account_id, resource_group_id, billingmonth, headers={})
+        response = _service.get_resource_usage_resource_group(
+            account_id,
+            resource_group_id,
+            billingmonth,
+            headers={},
+        )
 
         # Check for correct operation
         assert len(responses.calls) == 1
@@ -728,8 +871,14 @@ class TestGetResourceUsageResourceGroup:
         """
         # Set up mock
         url = preprocess_url('/v4/accounts/testString/resource_groups/testString/resource_instances/usage/testString')
-        mock_response = '{"limit": 5, "count": 5, "first": {"href": "href"}, "next": {"href": "href", "offset": "offset"}, "resources": [{"account_id": "account_id", "resource_instance_id": "resource_instance_id", "resource_instance_name": "resource_instance_name", "resource_id": "resource_id", "resource_name": "resource_name", "resource_group_id": "resource_group_id", "resource_group_name": "resource_group_name", "organization_id": "organization_id", "organization_name": "organization_name", "space_id": "space_id", "space_name": "space_name", "consumer_id": "consumer_id", "region": "region", "pricing_region": "pricing_region", "pricing_country": "USA", "currency_code": "USD", "billable": true, "plan_id": "plan_id", "plan_name": "plan_name", "month": "2017-08", "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "pending": true, "currency_rate": 10.8716}]}'
-        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
+        mock_response = '{"limit": 5, "count": 5, "first": {"href": "href"}, "next": {"href": "href", "offset": "offset"}, "resources": [{"account_id": "account_id", "resource_instance_id": "resource_instance_id", "resource_instance_name": "resource_instance_name", "resource_id": "resource_id", "resource_name": "resource_name", "resource_group_id": "resource_group_id", "resource_group_name": "resource_group_name", "organization_id": "organization_id", "organization_name": "organization_name", "space_id": "space_id", "space_name": "space_name", "consumer_id": "consumer_id", "region": "region", "pricing_region": "pricing_region", "pricing_country": "USA", "currency_code": "USD", "billable": true, "plan_id": "plan_id", "plan_name": "plan_name", "pricing_plan_id": "pricing_plan_id", "month": "2017-08", "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "pending": true, "currency_rate": 10.8716, "tags": ["anyValue"]}]}'
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
 
         # Set up parameter values
         account_id = 'testString'
@@ -763,10 +912,22 @@ class TestGetResourceUsageResourceGroup:
         """
         # Set up a two-page mock response
         url = preprocess_url('/v4/accounts/testString/resource_groups/testString/resource_instances/usage/testString')
-        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?_start=1"},"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716}]}'
-        mock_response2 = '{"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716}]}'
-        responses.add(responses.GET, url, body=mock_response1, content_type='application/json', status=200)
-        responses.add(responses.GET, url, body=mock_response2, content_type='application/json', status=200)
+        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?_start=1"},"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","pricing_plan_id":"pricing_plan_id","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716,"tags":["anyValue"]}]}'
+        mock_response2 = '{"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","pricing_plan_id":"pricing_plan_id","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716,"tags":["anyValue"]}]}'
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response1,
+            content_type='application/json',
+            status=200,
+        )
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response2,
+            content_type='application/json',
+            status=200,
+        )
 
         # Exercise the pager class for this operation
         all_results = []
@@ -776,8 +937,9 @@ class TestGetResourceUsageResourceGroup:
             resource_group_id='testString',
             billingmonth='testString',
             names=True,
+            tags=True,
             accept_language='testString',
-            limit=1,
+            limit=30,
             resource_instance_id='testString',
             resource_id='testString',
             plan_id='testString',
@@ -796,10 +958,22 @@ class TestGetResourceUsageResourceGroup:
         """
         # Set up a two-page mock response
         url = preprocess_url('/v4/accounts/testString/resource_groups/testString/resource_instances/usage/testString')
-        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?_start=1"},"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716}]}'
-        mock_response2 = '{"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716}]}'
-        responses.add(responses.GET, url, body=mock_response1, content_type='application/json', status=200)
-        responses.add(responses.GET, url, body=mock_response2, content_type='application/json', status=200)
+        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?_start=1"},"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","pricing_plan_id":"pricing_plan_id","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716,"tags":["anyValue"]}]}'
+        mock_response2 = '{"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","pricing_plan_id":"pricing_plan_id","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716,"tags":["anyValue"]}]}'
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response1,
+            content_type='application/json',
+            status=200,
+        )
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response2,
+            content_type='application/json',
+            status=200,
+        )
 
         # Exercise the pager class for this operation
         pager = GetResourceUsageResourceGroupPager(
@@ -808,8 +982,9 @@ class TestGetResourceUsageResourceGroup:
             resource_group_id='testString',
             billingmonth='testString',
             names=True,
+            tags=True,
             accept_language='testString',
-            limit=1,
+            limit=30,
             resource_instance_id='testString',
             resource_id='testString',
             plan_id='testString',
@@ -832,16 +1007,23 @@ class TestGetResourceUsageOrg:
         """
         # Set up mock
         url = preprocess_url('/v4/accounts/testString/organizations/testString/resource_instances/usage/testString')
-        mock_response = '{"limit": 5, "count": 5, "first": {"href": "href"}, "next": {"href": "href", "offset": "offset"}, "resources": [{"account_id": "account_id", "resource_instance_id": "resource_instance_id", "resource_instance_name": "resource_instance_name", "resource_id": "resource_id", "resource_name": "resource_name", "resource_group_id": "resource_group_id", "resource_group_name": "resource_group_name", "organization_id": "organization_id", "organization_name": "organization_name", "space_id": "space_id", "space_name": "space_name", "consumer_id": "consumer_id", "region": "region", "pricing_region": "pricing_region", "pricing_country": "USA", "currency_code": "USD", "billable": true, "plan_id": "plan_id", "plan_name": "plan_name", "month": "2017-08", "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "pending": true, "currency_rate": 10.8716}]}'
-        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
+        mock_response = '{"limit": 5, "count": 5, "first": {"href": "href"}, "next": {"href": "href", "offset": "offset"}, "resources": [{"account_id": "account_id", "resource_instance_id": "resource_instance_id", "resource_instance_name": "resource_instance_name", "resource_id": "resource_id", "resource_name": "resource_name", "resource_group_id": "resource_group_id", "resource_group_name": "resource_group_name", "organization_id": "organization_id", "organization_name": "organization_name", "space_id": "space_id", "space_name": "space_name", "consumer_id": "consumer_id", "region": "region", "pricing_region": "pricing_region", "pricing_country": "USA", "currency_code": "USD", "billable": true, "plan_id": "plan_id", "plan_name": "plan_name", "pricing_plan_id": "pricing_plan_id", "month": "2017-08", "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "pending": true, "currency_rate": 10.8716, "tags": ["anyValue"]}]}'
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
 
         # Set up parameter values
         account_id = 'testString'
         organization_id = 'testString'
         billingmonth = 'testString'
         names = True
+        tags = True
         accept_language = 'testString'
-        limit = 1
+        limit = 30
         start = 'testString'
         resource_instance_id = 'testString'
         resource_id = 'testString'
@@ -854,6 +1036,7 @@ class TestGetResourceUsageOrg:
             organization_id,
             billingmonth,
             names=names,
+            tags=tags,
             accept_language=accept_language,
             limit=limit,
             start=start,
@@ -871,6 +1054,7 @@ class TestGetResourceUsageOrg:
         query_string = responses.calls[0].request.url.split('?', 1)[1]
         query_string = urllib.parse.unquote_plus(query_string)
         assert '_names={}'.format('true' if names else 'false') in query_string
+        assert '_tags={}'.format('true' if tags else 'false') in query_string
         assert '_limit={}'.format(limit) in query_string
         assert '_start={}'.format(start) in query_string
         assert 'resource_instance_id={}'.format(resource_instance_id) in query_string
@@ -894,8 +1078,14 @@ class TestGetResourceUsageOrg:
         """
         # Set up mock
         url = preprocess_url('/v4/accounts/testString/organizations/testString/resource_instances/usage/testString')
-        mock_response = '{"limit": 5, "count": 5, "first": {"href": "href"}, "next": {"href": "href", "offset": "offset"}, "resources": [{"account_id": "account_id", "resource_instance_id": "resource_instance_id", "resource_instance_name": "resource_instance_name", "resource_id": "resource_id", "resource_name": "resource_name", "resource_group_id": "resource_group_id", "resource_group_name": "resource_group_name", "organization_id": "organization_id", "organization_name": "organization_name", "space_id": "space_id", "space_name": "space_name", "consumer_id": "consumer_id", "region": "region", "pricing_region": "pricing_region", "pricing_country": "USA", "currency_code": "USD", "billable": true, "plan_id": "plan_id", "plan_name": "plan_name", "month": "2017-08", "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "pending": true, "currency_rate": 10.8716}]}'
-        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
+        mock_response = '{"limit": 5, "count": 5, "first": {"href": "href"}, "next": {"href": "href", "offset": "offset"}, "resources": [{"account_id": "account_id", "resource_instance_id": "resource_instance_id", "resource_instance_name": "resource_instance_name", "resource_id": "resource_id", "resource_name": "resource_name", "resource_group_id": "resource_group_id", "resource_group_name": "resource_group_name", "organization_id": "organization_id", "organization_name": "organization_name", "space_id": "space_id", "space_name": "space_name", "consumer_id": "consumer_id", "region": "region", "pricing_region": "pricing_region", "pricing_country": "USA", "currency_code": "USD", "billable": true, "plan_id": "plan_id", "plan_name": "plan_name", "pricing_plan_id": "pricing_plan_id", "month": "2017-08", "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "pending": true, "currency_rate": 10.8716, "tags": ["anyValue"]}]}'
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
 
         # Set up parameter values
         account_id = 'testString'
@@ -903,7 +1093,12 @@ class TestGetResourceUsageOrg:
         billingmonth = 'testString'
 
         # Invoke method
-        response = _service.get_resource_usage_org(account_id, organization_id, billingmonth, headers={})
+        response = _service.get_resource_usage_org(
+            account_id,
+            organization_id,
+            billingmonth,
+            headers={},
+        )
 
         # Check for correct operation
         assert len(responses.calls) == 1
@@ -925,8 +1120,14 @@ class TestGetResourceUsageOrg:
         """
         # Set up mock
         url = preprocess_url('/v4/accounts/testString/organizations/testString/resource_instances/usage/testString')
-        mock_response = '{"limit": 5, "count": 5, "first": {"href": "href"}, "next": {"href": "href", "offset": "offset"}, "resources": [{"account_id": "account_id", "resource_instance_id": "resource_instance_id", "resource_instance_name": "resource_instance_name", "resource_id": "resource_id", "resource_name": "resource_name", "resource_group_id": "resource_group_id", "resource_group_name": "resource_group_name", "organization_id": "organization_id", "organization_name": "organization_name", "space_id": "space_id", "space_name": "space_name", "consumer_id": "consumer_id", "region": "region", "pricing_region": "pricing_region", "pricing_country": "USA", "currency_code": "USD", "billable": true, "plan_id": "plan_id", "plan_name": "plan_name", "month": "2017-08", "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "pending": true, "currency_rate": 10.8716}]}'
-        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
+        mock_response = '{"limit": 5, "count": 5, "first": {"href": "href"}, "next": {"href": "href", "offset": "offset"}, "resources": [{"account_id": "account_id", "resource_instance_id": "resource_instance_id", "resource_instance_name": "resource_instance_name", "resource_id": "resource_id", "resource_name": "resource_name", "resource_group_id": "resource_group_id", "resource_group_name": "resource_group_name", "organization_id": "organization_id", "organization_name": "organization_name", "space_id": "space_id", "space_name": "space_name", "consumer_id": "consumer_id", "region": "region", "pricing_region": "pricing_region", "pricing_country": "USA", "currency_code": "USD", "billable": true, "plan_id": "plan_id", "plan_name": "plan_name", "pricing_plan_id": "pricing_plan_id", "month": "2017-08", "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "pending": true, "currency_rate": 10.8716, "tags": ["anyValue"]}]}'
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
 
         # Set up parameter values
         account_id = 'testString'
@@ -960,10 +1161,22 @@ class TestGetResourceUsageOrg:
         """
         # Set up a two-page mock response
         url = preprocess_url('/v4/accounts/testString/organizations/testString/resource_instances/usage/testString')
-        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?_start=1"},"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716}]}'
-        mock_response2 = '{"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716}]}'
-        responses.add(responses.GET, url, body=mock_response1, content_type='application/json', status=200)
-        responses.add(responses.GET, url, body=mock_response2, content_type='application/json', status=200)
+        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?_start=1"},"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","pricing_plan_id":"pricing_plan_id","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716,"tags":["anyValue"]}]}'
+        mock_response2 = '{"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","pricing_plan_id":"pricing_plan_id","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716,"tags":["anyValue"]}]}'
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response1,
+            content_type='application/json',
+            status=200,
+        )
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response2,
+            content_type='application/json',
+            status=200,
+        )
 
         # Exercise the pager class for this operation
         all_results = []
@@ -973,8 +1186,9 @@ class TestGetResourceUsageOrg:
             organization_id='testString',
             billingmonth='testString',
             names=True,
+            tags=True,
             accept_language='testString',
-            limit=1,
+            limit=30,
             resource_instance_id='testString',
             resource_id='testString',
             plan_id='testString',
@@ -993,10 +1207,22 @@ class TestGetResourceUsageOrg:
         """
         # Set up a two-page mock response
         url = preprocess_url('/v4/accounts/testString/organizations/testString/resource_instances/usage/testString')
-        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?_start=1"},"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716}]}'
-        mock_response2 = '{"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716}]}'
-        responses.add(responses.GET, url, body=mock_response1, content_type='application/json', status=200)
-        responses.add(responses.GET, url, body=mock_response2, content_type='application/json', status=200)
+        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?_start=1"},"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","pricing_plan_id":"pricing_plan_id","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716,"tags":["anyValue"]}]}'
+        mock_response2 = '{"total_count":2,"limit":1,"resources":[{"account_id":"account_id","resource_instance_id":"resource_instance_id","resource_instance_name":"resource_instance_name","resource_id":"resource_id","resource_name":"resource_name","resource_group_id":"resource_group_id","resource_group_name":"resource_group_name","organization_id":"organization_id","organization_name":"organization_name","space_id":"space_id","space_name":"space_name","consumer_id":"consumer_id","region":"region","pricing_region":"pricing_region","pricing_country":"USA","currency_code":"USD","billable":true,"plan_id":"plan_id","plan_name":"plan_name","pricing_plan_id":"pricing_plan_id","month":"2017-08","usage":[{"metric":"UP-TIME","metric_name":"UP-TIME","quantity":711.11,"rateable_quantity":700,"cost":123.45,"rated_cost":130.0,"price":["anyValue"],"unit":"HOURS","unit_name":"HOURS","non_chargeable":true,"discounts":[{"ref":"Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9","name":"platform-discount","display_name":"Platform Service Discount","discount":5}]}],"pending":true,"currency_rate":10.8716,"tags":["anyValue"]}]}'
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response1,
+            content_type='application/json',
+            status=200,
+        )
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response2,
+            content_type='application/json',
+            status=200,
+        )
 
         # Exercise the pager class for this operation
         pager = GetResourceUsageOrgPager(
@@ -1005,8 +1231,9 @@ class TestGetResourceUsageOrg:
             organization_id='testString',
             billingmonth='testString',
             names=True,
+            tags=True,
             accept_language='testString',
-            limit=1,
+            limit=30,
             resource_instance_id='testString',
             resource_id='testString',
             plan_id='testString',
@@ -1069,7 +1296,13 @@ class TestGetOrgUsage:
         # Set up mock
         url = preprocess_url('/v4/accounts/testString/organizations/testString/usage/testString')
         mock_response = '{"account_id": "account_id", "organization_id": "organization_id", "organization_name": "organization_name", "pricing_country": "USA", "currency_code": "USD", "month": "2017-08", "resources": [{"resource_id": "resource_id", "resource_name": "resource_name", "billable_cost": 13, "billable_rated_cost": 19, "non_billable_cost": 17, "non_billable_rated_cost": 23, "plans": [{"plan_id": "plan_id", "plan_name": "plan_name", "pricing_region": "pricing_region", "pricing_plan_id": "pricing_plan_id", "billable": true, "cost": 4, "rated_cost": 10, "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}], "pending": true}], "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "currency_rate": 10.8716}'
-        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
 
         # Set up parameter values
         account_id = 'testString'
@@ -1080,7 +1313,12 @@ class TestGetOrgUsage:
 
         # Invoke method
         response = _service.get_org_usage(
-            account_id, organization_id, billingmonth, names=names, accept_language=accept_language, headers={}
+            account_id,
+            organization_id,
+            billingmonth,
+            names=names,
+            accept_language=accept_language,
+            headers={},
         )
 
         # Check for correct operation
@@ -1108,7 +1346,13 @@ class TestGetOrgUsage:
         # Set up mock
         url = preprocess_url('/v4/accounts/testString/organizations/testString/usage/testString')
         mock_response = '{"account_id": "account_id", "organization_id": "organization_id", "organization_name": "organization_name", "pricing_country": "USA", "currency_code": "USD", "month": "2017-08", "resources": [{"resource_id": "resource_id", "resource_name": "resource_name", "billable_cost": 13, "billable_rated_cost": 19, "non_billable_cost": 17, "non_billable_rated_cost": 23, "plans": [{"plan_id": "plan_id", "plan_name": "plan_name", "pricing_region": "pricing_region", "pricing_plan_id": "pricing_plan_id", "billable": true, "cost": 4, "rated_cost": 10, "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}], "pending": true}], "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "currency_rate": 10.8716}'
-        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
 
         # Set up parameter values
         account_id = 'testString'
@@ -1116,7 +1360,12 @@ class TestGetOrgUsage:
         billingmonth = 'testString'
 
         # Invoke method
-        response = _service.get_org_usage(account_id, organization_id, billingmonth, headers={})
+        response = _service.get_org_usage(
+            account_id,
+            organization_id,
+            billingmonth,
+            headers={},
+        )
 
         # Check for correct operation
         assert len(responses.calls) == 1
@@ -1139,7 +1388,13 @@ class TestGetOrgUsage:
         # Set up mock
         url = preprocess_url('/v4/accounts/testString/organizations/testString/usage/testString')
         mock_response = '{"account_id": "account_id", "organization_id": "organization_id", "organization_name": "organization_name", "pricing_country": "USA", "currency_code": "USD", "month": "2017-08", "resources": [{"resource_id": "resource_id", "resource_name": "resource_name", "billable_cost": 13, "billable_rated_cost": 19, "non_billable_cost": 17, "non_billable_rated_cost": 23, "plans": [{"plan_id": "plan_id", "plan_name": "plan_name", "pricing_region": "pricing_region", "pricing_plan_id": "pricing_plan_id", "billable": true, "cost": 4, "rated_cost": 10, "usage": [{"metric": "UP-TIME", "metric_name": "UP-TIME", "quantity": 711.11, "rateable_quantity": 700, "cost": 123.45, "rated_cost": 130.0, "price": ["anyValue"], "unit": "HOURS", "unit_name": "HOURS", "non_chargeable": true, "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}], "pending": true}], "discounts": [{"ref": "Discount-d27beddb-111b-4bbf-8cb1-b770f531c1a9", "name": "platform-discount", "display_name": "Platform Service Discount", "discount": 5}]}], "currency_rate": 10.8716}'
-        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
 
         # Set up parameter values
         account_id = 'testString'
@@ -1172,11 +1427,576 @@ class TestGetOrgUsage:
 # End of Service: OrganizationOperations
 ##############################################################################
 
+##############################################################################
+# Start of Service: BillingReportsSnapshot
+##############################################################################
+# region
+
+
+class TestNewInstance:
+    """
+    Test Class for new_instance
+    """
+
+    def test_new_instance(self):
+        """
+        new_instance()
+        """
+        os.environ['TEST_SERVICE_AUTH_TYPE'] = 'noAuth'
+
+        service = UsageReportsV4.new_instance(
+            service_name='TEST_SERVICE',
+        )
+
+        assert service is not None
+        assert isinstance(service, UsageReportsV4)
+
+    def test_new_instance_without_authenticator(self):
+        """
+        new_instance_without_authenticator()
+        """
+        with pytest.raises(ValueError, match='authenticator must be provided'):
+            service = UsageReportsV4.new_instance(
+                service_name='TEST_SERVICE_NOT_FOUND',
+            )
+
+
+class TestCreateReportsSnapshotConfig:
+    """
+    Test Class for create_reports_snapshot_config
+    """
+
+    @responses.activate
+    def test_create_reports_snapshot_config_all_params(self):
+        """
+        create_reports_snapshot_config()
+        """
+        # Set up mock
+        url = preprocess_url('/v1/billing-reports-snapshot-config')
+        mock_response = '{"account_id": "abc", "state": "enabled", "account_type": "account", "interval": "daily", "versioning": "new", "report_types": ["account_summary"], "compression": "GZIP", "content_type": "text/csv", "cos_reports_folder": "IBMCloud-Billing-Reports", "cos_bucket": "bucket_name", "cos_location": "us-south", "cos_endpoint": "https://s3.us-west.cloud-object-storage.test.appdomain.cloud", "created_at": 1687469854342, "last_updated_at": 1687469989326, "history": [{"start_time": 1687469854342, "end_time": 1687469989326, "updated_by": "IBMid-506PR16K14", "account_id": "abc", "state": "enabled", "account_type": "account", "interval": "daily", "versioning": "new", "report_types": ["account_summary"], "compression": "GZIP", "content_type": "text/csv", "cos_reports_folder": "IBMCloud-Billing-Reports", "cos_bucket": "bucket_name", "cos_location": "us-south", "cos_endpoint": "https://s3.us-west.cloud-object-storage.test.appdomain.cloud"}]}'
+        responses.add(
+            responses.POST,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=201,
+        )
+
+        # Set up parameter values
+        account_id = 'abc'
+        interval = 'daily'
+        cos_bucket = 'bucket_name'
+        cos_location = 'us-south'
+        cos_reports_folder = 'IBMCloud-Billing-Reports'
+        report_types = ['account_summary', 'enterprise_summary', 'account_resource_instance_usage']
+        versioning = 'new'
+
+        # Invoke method
+        response = _service.create_reports_snapshot_config(
+            account_id,
+            interval,
+            cos_bucket,
+            cos_location,
+            cos_reports_folder=cos_reports_folder,
+            report_types=report_types,
+            versioning=versioning,
+            headers={},
+        )
+
+        # Check for correct operation
+        assert len(responses.calls) == 1
+        assert response.status_code == 201
+        # Validate body params
+        req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
+        assert req_body['account_id'] == 'abc'
+        assert req_body['interval'] == 'daily'
+        assert req_body['cos_bucket'] == 'bucket_name'
+        assert req_body['cos_location'] == 'us-south'
+        assert req_body['cos_reports_folder'] == 'IBMCloud-Billing-Reports'
+        assert req_body['report_types'] == ['account_summary', 'enterprise_summary', 'account_resource_instance_usage']
+        assert req_body['versioning'] == 'new'
+
+    def test_create_reports_snapshot_config_all_params_with_retries(self):
+        # Enable retries and run test_create_reports_snapshot_config_all_params.
+        _service.enable_retries()
+        self.test_create_reports_snapshot_config_all_params()
+
+        # Disable retries and run test_create_reports_snapshot_config_all_params.
+        _service.disable_retries()
+        self.test_create_reports_snapshot_config_all_params()
+
+    @responses.activate
+    def test_create_reports_snapshot_config_value_error(self):
+        """
+        test_create_reports_snapshot_config_value_error()
+        """
+        # Set up mock
+        url = preprocess_url('/v1/billing-reports-snapshot-config')
+        mock_response = '{"account_id": "abc", "state": "enabled", "account_type": "account", "interval": "daily", "versioning": "new", "report_types": ["account_summary"], "compression": "GZIP", "content_type": "text/csv", "cos_reports_folder": "IBMCloud-Billing-Reports", "cos_bucket": "bucket_name", "cos_location": "us-south", "cos_endpoint": "https://s3.us-west.cloud-object-storage.test.appdomain.cloud", "created_at": 1687469854342, "last_updated_at": 1687469989326, "history": [{"start_time": 1687469854342, "end_time": 1687469989326, "updated_by": "IBMid-506PR16K14", "account_id": "abc", "state": "enabled", "account_type": "account", "interval": "daily", "versioning": "new", "report_types": ["account_summary"], "compression": "GZIP", "content_type": "text/csv", "cos_reports_folder": "IBMCloud-Billing-Reports", "cos_bucket": "bucket_name", "cos_location": "us-south", "cos_endpoint": "https://s3.us-west.cloud-object-storage.test.appdomain.cloud"}]}'
+        responses.add(
+            responses.POST,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=201,
+        )
+
+        # Set up parameter values
+        account_id = 'abc'
+        interval = 'daily'
+        cos_bucket = 'bucket_name'
+        cos_location = 'us-south'
+        cos_reports_folder = 'IBMCloud-Billing-Reports'
+        report_types = ['account_summary', 'enterprise_summary', 'account_resource_instance_usage']
+        versioning = 'new'
+
+        # Pass in all but one required param and check for a ValueError
+        req_param_dict = {
+            "account_id": account_id,
+            "interval": interval,
+            "cos_bucket": cos_bucket,
+            "cos_location": cos_location,
+        }
+        for param in req_param_dict.keys():
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
+            with pytest.raises(ValueError):
+                _service.create_reports_snapshot_config(**req_copy)
+
+    def test_create_reports_snapshot_config_value_error_with_retries(self):
+        # Enable retries and run test_create_reports_snapshot_config_value_error.
+        _service.enable_retries()
+        self.test_create_reports_snapshot_config_value_error()
+
+        # Disable retries and run test_create_reports_snapshot_config_value_error.
+        _service.disable_retries()
+        self.test_create_reports_snapshot_config_value_error()
+
+
+class TestGetReportsSnapshotConfig:
+    """
+    Test Class for get_reports_snapshot_config
+    """
+
+    @responses.activate
+    def test_get_reports_snapshot_config_all_params(self):
+        """
+        get_reports_snapshot_config()
+        """
+        # Set up mock
+        url = preprocess_url('/v1/billing-reports-snapshot-config')
+        mock_response = '{"account_id": "abc", "state": "enabled", "account_type": "account", "interval": "daily", "versioning": "new", "report_types": ["account_summary"], "compression": "GZIP", "content_type": "text/csv", "cos_reports_folder": "IBMCloud-Billing-Reports", "cos_bucket": "bucket_name", "cos_location": "us-south", "cos_endpoint": "https://s3.us-west.cloud-object-storage.test.appdomain.cloud", "created_at": 1687469854342, "last_updated_at": 1687469989326, "history": [{"start_time": 1687469854342, "end_time": 1687469989326, "updated_by": "IBMid-506PR16K14", "account_id": "abc", "state": "enabled", "account_type": "account", "interval": "daily", "versioning": "new", "report_types": ["account_summary"], "compression": "GZIP", "content_type": "text/csv", "cos_reports_folder": "IBMCloud-Billing-Reports", "cos_bucket": "bucket_name", "cos_location": "us-south", "cos_endpoint": "https://s3.us-west.cloud-object-storage.test.appdomain.cloud"}]}'
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
+
+        # Set up parameter values
+        account_id = 'abc'
+
+        # Invoke method
+        response = _service.get_reports_snapshot_config(
+            account_id,
+            headers={},
+        )
+
+        # Check for correct operation
+        assert len(responses.calls) == 1
+        assert response.status_code == 200
+        # Validate query params
+        query_string = responses.calls[0].request.url.split('?', 1)[1]
+        query_string = urllib.parse.unquote_plus(query_string)
+        assert 'account_id={}'.format(account_id) in query_string
+
+    def test_get_reports_snapshot_config_all_params_with_retries(self):
+        # Enable retries and run test_get_reports_snapshot_config_all_params.
+        _service.enable_retries()
+        self.test_get_reports_snapshot_config_all_params()
+
+        # Disable retries and run test_get_reports_snapshot_config_all_params.
+        _service.disable_retries()
+        self.test_get_reports_snapshot_config_all_params()
+
+    @responses.activate
+    def test_get_reports_snapshot_config_value_error(self):
+        """
+        test_get_reports_snapshot_config_value_error()
+        """
+        # Set up mock
+        url = preprocess_url('/v1/billing-reports-snapshot-config')
+        mock_response = '{"account_id": "abc", "state": "enabled", "account_type": "account", "interval": "daily", "versioning": "new", "report_types": ["account_summary"], "compression": "GZIP", "content_type": "text/csv", "cos_reports_folder": "IBMCloud-Billing-Reports", "cos_bucket": "bucket_name", "cos_location": "us-south", "cos_endpoint": "https://s3.us-west.cloud-object-storage.test.appdomain.cloud", "created_at": 1687469854342, "last_updated_at": 1687469989326, "history": [{"start_time": 1687469854342, "end_time": 1687469989326, "updated_by": "IBMid-506PR16K14", "account_id": "abc", "state": "enabled", "account_type": "account", "interval": "daily", "versioning": "new", "report_types": ["account_summary"], "compression": "GZIP", "content_type": "text/csv", "cos_reports_folder": "IBMCloud-Billing-Reports", "cos_bucket": "bucket_name", "cos_location": "us-south", "cos_endpoint": "https://s3.us-west.cloud-object-storage.test.appdomain.cloud"}]}'
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
+
+        # Set up parameter values
+        account_id = 'abc'
+
+        # Pass in all but one required param and check for a ValueError
+        req_param_dict = {
+            "account_id": account_id,
+        }
+        for param in req_param_dict.keys():
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
+            with pytest.raises(ValueError):
+                _service.get_reports_snapshot_config(**req_copy)
+
+    def test_get_reports_snapshot_config_value_error_with_retries(self):
+        # Enable retries and run test_get_reports_snapshot_config_value_error.
+        _service.enable_retries()
+        self.test_get_reports_snapshot_config_value_error()
+
+        # Disable retries and run test_get_reports_snapshot_config_value_error.
+        _service.disable_retries()
+        self.test_get_reports_snapshot_config_value_error()
+
+
+class TestUpdateReportsSnapshotConfig:
+    """
+    Test Class for update_reports_snapshot_config
+    """
+
+    @responses.activate
+    def test_update_reports_snapshot_config_all_params(self):
+        """
+        update_reports_snapshot_config()
+        """
+        # Set up mock
+        url = preprocess_url('/v1/billing-reports-snapshot-config')
+        mock_response = '{"account_id": "abc", "state": "enabled", "account_type": "account", "interval": "daily", "versioning": "new", "report_types": ["account_summary"], "compression": "GZIP", "content_type": "text/csv", "cos_reports_folder": "IBMCloud-Billing-Reports", "cos_bucket": "bucket_name", "cos_location": "us-south", "cos_endpoint": "https://s3.us-west.cloud-object-storage.test.appdomain.cloud", "created_at": 1687469854342, "last_updated_at": 1687469989326, "history": [{"start_time": 1687469854342, "end_time": 1687469989326, "updated_by": "IBMid-506PR16K14", "account_id": "abc", "state": "enabled", "account_type": "account", "interval": "daily", "versioning": "new", "report_types": ["account_summary"], "compression": "GZIP", "content_type": "text/csv", "cos_reports_folder": "IBMCloud-Billing-Reports", "cos_bucket": "bucket_name", "cos_location": "us-south", "cos_endpoint": "https://s3.us-west.cloud-object-storage.test.appdomain.cloud"}]}'
+        responses.add(
+            responses.PATCH,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
+
+        # Set up parameter values
+        account_id = 'abc'
+        interval = 'daily'
+        cos_bucket = 'bucket_name'
+        cos_location = 'us-south'
+        cos_reports_folder = 'IBMCloud-Billing-Reports'
+        report_types = ['account_summary', 'enterprise_summary', 'account_resource_instance_usage']
+        versioning = 'new'
+
+        # Invoke method
+        response = _service.update_reports_snapshot_config(
+            account_id,
+            interval=interval,
+            cos_bucket=cos_bucket,
+            cos_location=cos_location,
+            cos_reports_folder=cos_reports_folder,
+            report_types=report_types,
+            versioning=versioning,
+            headers={},
+        )
+
+        # Check for correct operation
+        assert len(responses.calls) == 1
+        assert response.status_code == 200
+        # Validate body params
+        req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
+        assert req_body['account_id'] == 'abc'
+        assert req_body['interval'] == 'daily'
+        assert req_body['cos_bucket'] == 'bucket_name'
+        assert req_body['cos_location'] == 'us-south'
+        assert req_body['cos_reports_folder'] == 'IBMCloud-Billing-Reports'
+        assert req_body['report_types'] == ['account_summary', 'enterprise_summary', 'account_resource_instance_usage']
+        assert req_body['versioning'] == 'new'
+
+    def test_update_reports_snapshot_config_all_params_with_retries(self):
+        # Enable retries and run test_update_reports_snapshot_config_all_params.
+        _service.enable_retries()
+        self.test_update_reports_snapshot_config_all_params()
+
+        # Disable retries and run test_update_reports_snapshot_config_all_params.
+        _service.disable_retries()
+        self.test_update_reports_snapshot_config_all_params()
+
+    @responses.activate
+    def test_update_reports_snapshot_config_value_error(self):
+        """
+        test_update_reports_snapshot_config_value_error()
+        """
+        # Set up mock
+        url = preprocess_url('/v1/billing-reports-snapshot-config')
+        mock_response = '{"account_id": "abc", "state": "enabled", "account_type": "account", "interval": "daily", "versioning": "new", "report_types": ["account_summary"], "compression": "GZIP", "content_type": "text/csv", "cos_reports_folder": "IBMCloud-Billing-Reports", "cos_bucket": "bucket_name", "cos_location": "us-south", "cos_endpoint": "https://s3.us-west.cloud-object-storage.test.appdomain.cloud", "created_at": 1687469854342, "last_updated_at": 1687469989326, "history": [{"start_time": 1687469854342, "end_time": 1687469989326, "updated_by": "IBMid-506PR16K14", "account_id": "abc", "state": "enabled", "account_type": "account", "interval": "daily", "versioning": "new", "report_types": ["account_summary"], "compression": "GZIP", "content_type": "text/csv", "cos_reports_folder": "IBMCloud-Billing-Reports", "cos_bucket": "bucket_name", "cos_location": "us-south", "cos_endpoint": "https://s3.us-west.cloud-object-storage.test.appdomain.cloud"}]}'
+        responses.add(
+            responses.PATCH,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
+
+        # Set up parameter values
+        account_id = 'abc'
+        interval = 'daily'
+        cos_bucket = 'bucket_name'
+        cos_location = 'us-south'
+        cos_reports_folder = 'IBMCloud-Billing-Reports'
+        report_types = ['account_summary', 'enterprise_summary', 'account_resource_instance_usage']
+        versioning = 'new'
+
+        # Pass in all but one required param and check for a ValueError
+        req_param_dict = {
+            "account_id": account_id,
+        }
+        for param in req_param_dict.keys():
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
+            with pytest.raises(ValueError):
+                _service.update_reports_snapshot_config(**req_copy)
+
+    def test_update_reports_snapshot_config_value_error_with_retries(self):
+        # Enable retries and run test_update_reports_snapshot_config_value_error.
+        _service.enable_retries()
+        self.test_update_reports_snapshot_config_value_error()
+
+        # Disable retries and run test_update_reports_snapshot_config_value_error.
+        _service.disable_retries()
+        self.test_update_reports_snapshot_config_value_error()
+
+
+class TestDeleteReportsSnapshotConfig:
+    """
+    Test Class for delete_reports_snapshot_config
+    """
+
+    @responses.activate
+    def test_delete_reports_snapshot_config_all_params(self):
+        """
+        delete_reports_snapshot_config()
+        """
+        # Set up mock
+        url = preprocess_url('/v1/billing-reports-snapshot-config')
+        responses.add(
+            responses.DELETE,
+            url,
+            status=204,
+        )
+
+        # Set up parameter values
+        account_id = 'abc'
+
+        # Invoke method
+        response = _service.delete_reports_snapshot_config(
+            account_id,
+            headers={},
+        )
+
+        # Check for correct operation
+        assert len(responses.calls) == 1
+        assert response.status_code == 204
+        # Validate query params
+        query_string = responses.calls[0].request.url.split('?', 1)[1]
+        query_string = urllib.parse.unquote_plus(query_string)
+        assert 'account_id={}'.format(account_id) in query_string
+
+    def test_delete_reports_snapshot_config_all_params_with_retries(self):
+        # Enable retries and run test_delete_reports_snapshot_config_all_params.
+        _service.enable_retries()
+        self.test_delete_reports_snapshot_config_all_params()
+
+        # Disable retries and run test_delete_reports_snapshot_config_all_params.
+        _service.disable_retries()
+        self.test_delete_reports_snapshot_config_all_params()
+
+    @responses.activate
+    def test_delete_reports_snapshot_config_value_error(self):
+        """
+        test_delete_reports_snapshot_config_value_error()
+        """
+        # Set up mock
+        url = preprocess_url('/v1/billing-reports-snapshot-config')
+        responses.add(
+            responses.DELETE,
+            url,
+            status=204,
+        )
+
+        # Set up parameter values
+        account_id = 'abc'
+
+        # Pass in all but one required param and check for a ValueError
+        req_param_dict = {
+            "account_id": account_id,
+        }
+        for param in req_param_dict.keys():
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
+            with pytest.raises(ValueError):
+                _service.delete_reports_snapshot_config(**req_copy)
+
+    def test_delete_reports_snapshot_config_value_error_with_retries(self):
+        # Enable retries and run test_delete_reports_snapshot_config_value_error.
+        _service.enable_retries()
+        self.test_delete_reports_snapshot_config_value_error()
+
+        # Disable retries and run test_delete_reports_snapshot_config_value_error.
+        _service.disable_retries()
+        self.test_delete_reports_snapshot_config_value_error()
+
+
+class TestGetReportsSnapshot:
+    """
+    Test Class for get_reports_snapshot
+    """
+
+    @responses.activate
+    def test_get_reports_snapshot_all_params(self):
+        """
+        get_reports_snapshot()
+        """
+        # Set up mock
+        url = preprocess_url('/v1/billing-reports-snapshots')
+        mock_response = '{"count": 3, "first": {"href": "/v1/billing-reports-snapshots?_limit=10&account_id=272b9a4f73e11030d0ba037daee47a35&date_from=-Infinity&date_to=Infinity&month=2023-06"}, "next": {"href": "/v1/billing-reports-snapshots?_limit=10&account_id=272b9a4f73e11030d0ba037daee47a35&date_from=-Infinity&date_to=Infinity&month=2023-06"}, "snapshots": [{"account_id": "abc", "month": "2023-06", "account_type": "account", "expected_processed_at": 1687470383610, "state": "enabled", "billing_period": {"start": "2023-06-01T00:00:00.000Z", "end": "2023-06-30T23:59:59.999Z"}, "snapshot_id": "1685577600000", "charset": "UTF-8", "compression": "GZIP", "content_type": "text/csv", "bucket": "bucket_name", "version": "1.0", "created_on": "2023-06-22T21:47:28.297Z", "report_types": [{"type": "account_summary", "version": "1.0"}], "files": [{"report_types": "account_summary", "location": "june/2023-06/1685577600000/2023-06-account-summary-272b9a4f73e11030d0ba037daee47a35.csv.gz", "account_id": "abc"}], "processed_at": 1687470448297}]}'
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
+
+        # Set up parameter values
+        account_id = 'abc'
+        month = '2023-02'
+        date_from = 1675209600000
+        date_to = 1675987200000
+
+        # Invoke method
+        response = _service.get_reports_snapshot(
+            account_id,
+            month,
+            date_from=date_from,
+            date_to=date_to,
+            headers={},
+        )
+
+        # Check for correct operation
+        assert len(responses.calls) == 1
+        assert response.status_code == 200
+        # Validate query params
+        query_string = responses.calls[0].request.url.split('?', 1)[1]
+        query_string = urllib.parse.unquote_plus(query_string)
+        assert 'account_id={}'.format(account_id) in query_string
+        assert 'month={}'.format(month) in query_string
+        assert 'date_from={}'.format(date_from) in query_string
+        assert 'date_to={}'.format(date_to) in query_string
+
+    def test_get_reports_snapshot_all_params_with_retries(self):
+        # Enable retries and run test_get_reports_snapshot_all_params.
+        _service.enable_retries()
+        self.test_get_reports_snapshot_all_params()
+
+        # Disable retries and run test_get_reports_snapshot_all_params.
+        _service.disable_retries()
+        self.test_get_reports_snapshot_all_params()
+
+    @responses.activate
+    def test_get_reports_snapshot_required_params(self):
+        """
+        test_get_reports_snapshot_required_params()
+        """
+        # Set up mock
+        url = preprocess_url('/v1/billing-reports-snapshots')
+        mock_response = '{"count": 3, "first": {"href": "/v1/billing-reports-snapshots?_limit=10&account_id=272b9a4f73e11030d0ba037daee47a35&date_from=-Infinity&date_to=Infinity&month=2023-06"}, "next": {"href": "/v1/billing-reports-snapshots?_limit=10&account_id=272b9a4f73e11030d0ba037daee47a35&date_from=-Infinity&date_to=Infinity&month=2023-06"}, "snapshots": [{"account_id": "abc", "month": "2023-06", "account_type": "account", "expected_processed_at": 1687470383610, "state": "enabled", "billing_period": {"start": "2023-06-01T00:00:00.000Z", "end": "2023-06-30T23:59:59.999Z"}, "snapshot_id": "1685577600000", "charset": "UTF-8", "compression": "GZIP", "content_type": "text/csv", "bucket": "bucket_name", "version": "1.0", "created_on": "2023-06-22T21:47:28.297Z", "report_types": [{"type": "account_summary", "version": "1.0"}], "files": [{"report_types": "account_summary", "location": "june/2023-06/1685577600000/2023-06-account-summary-272b9a4f73e11030d0ba037daee47a35.csv.gz", "account_id": "abc"}], "processed_at": 1687470448297}]}'
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
+
+        # Set up parameter values
+        account_id = 'abc'
+        month = '2023-02'
+
+        # Invoke method
+        response = _service.get_reports_snapshot(
+            account_id,
+            month,
+            headers={},
+        )
+
+        # Check for correct operation
+        assert len(responses.calls) == 1
+        assert response.status_code == 200
+        # Validate query params
+        query_string = responses.calls[0].request.url.split('?', 1)[1]
+        query_string = urllib.parse.unquote_plus(query_string)
+        assert 'account_id={}'.format(account_id) in query_string
+        assert 'month={}'.format(month) in query_string
+
+    def test_get_reports_snapshot_required_params_with_retries(self):
+        # Enable retries and run test_get_reports_snapshot_required_params.
+        _service.enable_retries()
+        self.test_get_reports_snapshot_required_params()
+
+        # Disable retries and run test_get_reports_snapshot_required_params.
+        _service.disable_retries()
+        self.test_get_reports_snapshot_required_params()
+
+    @responses.activate
+    def test_get_reports_snapshot_value_error(self):
+        """
+        test_get_reports_snapshot_value_error()
+        """
+        # Set up mock
+        url = preprocess_url('/v1/billing-reports-snapshots')
+        mock_response = '{"count": 3, "first": {"href": "/v1/billing-reports-snapshots?_limit=10&account_id=272b9a4f73e11030d0ba037daee47a35&date_from=-Infinity&date_to=Infinity&month=2023-06"}, "next": {"href": "/v1/billing-reports-snapshots?_limit=10&account_id=272b9a4f73e11030d0ba037daee47a35&date_from=-Infinity&date_to=Infinity&month=2023-06"}, "snapshots": [{"account_id": "abc", "month": "2023-06", "account_type": "account", "expected_processed_at": 1687470383610, "state": "enabled", "billing_period": {"start": "2023-06-01T00:00:00.000Z", "end": "2023-06-30T23:59:59.999Z"}, "snapshot_id": "1685577600000", "charset": "UTF-8", "compression": "GZIP", "content_type": "text/csv", "bucket": "bucket_name", "version": "1.0", "created_on": "2023-06-22T21:47:28.297Z", "report_types": [{"type": "account_summary", "version": "1.0"}], "files": [{"report_types": "account_summary", "location": "june/2023-06/1685577600000/2023-06-account-summary-272b9a4f73e11030d0ba037daee47a35.csv.gz", "account_id": "abc"}], "processed_at": 1687470448297}]}'
+        responses.add(
+            responses.GET,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
+
+        # Set up parameter values
+        account_id = 'abc'
+        month = '2023-02'
+
+        # Pass in all but one required param and check for a ValueError
+        req_param_dict = {
+            "account_id": account_id,
+            "month": month,
+        }
+        for param in req_param_dict.keys():
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
+            with pytest.raises(ValueError):
+                _service.get_reports_snapshot(**req_copy)
+
+    def test_get_reports_snapshot_value_error_with_retries(self):
+        # Enable retries and run test_get_reports_snapshot_value_error.
+        _service.enable_retries()
+        self.test_get_reports_snapshot_value_error()
+
+        # Disable retries and run test_get_reports_snapshot_value_error.
+        _service.disable_retries()
+        self.test_get_reports_snapshot_value_error()
+
+
+# endregion
+##############################################################################
+# End of Service: BillingReportsSnapshot
+##############################################################################
+
 
 ##############################################################################
 # Start of Model Tests
 ##############################################################################
 # region
+
+
 class TestModel_AccountSummary:
     """
     Test Class for AccountSummary
@@ -1469,10 +2289,12 @@ class TestModel_InstanceUsage:
         instance_usage_model_json['billable'] = True
         instance_usage_model_json['plan_id'] = 'testString'
         instance_usage_model_json['plan_name'] = 'testString'
+        instance_usage_model_json['pricing_plan_id'] = 'testString'
         instance_usage_model_json['month'] = '2017-08'
         instance_usage_model_json['usage'] = [metric_model]
         instance_usage_model_json['pending'] = True
         instance_usage_model_json['currency_rate'] = 10.8716
+        instance_usage_model_json['tags'] = ['env:test', 'staging']
 
         # Construct a model instance of InstanceUsage by calling from_dict on the json representation
         instance_usage_model = InstanceUsage.from_dict(instance_usage_model_json)
@@ -1609,10 +2431,12 @@ class TestModel_InstancesUsage:
         instance_usage_model['billable'] = True
         instance_usage_model['plan_id'] = 'testString'
         instance_usage_model['plan_name'] = 'testString'
+        instance_usage_model['pricing_plan_id'] = 'testString'
         instance_usage_model['month'] = '2017-08'
         instance_usage_model['usage'] = [metric_model]
         instance_usage_model['pending'] = True
         instance_usage_model['currency_rate'] = 10.8716
+        instance_usage_model['tags'] = ['env:test', 'staging']
 
         # Construct a json representation of a InstancesUsage model
         instances_usage_model_json = {}
@@ -2081,6 +2905,399 @@ class TestModel_ResourcesSummary:
         assert resources_summary_model_json2 == resources_summary_model_json
 
 
+class TestModel_SnapshotConfigHistoryItem:
+    """
+    Test Class for SnapshotConfigHistoryItem
+    """
+
+    def test_snapshot_config_history_item_serialization(self):
+        """
+        Test serialization/deserialization for SnapshotConfigHistoryItem
+        """
+
+        # Construct a json representation of a SnapshotConfigHistoryItem model
+        snapshot_config_history_item_model_json = {}
+        snapshot_config_history_item_model_json['start_time'] = 1687469854342
+        snapshot_config_history_item_model_json['end_time'] = 1687469989326
+        snapshot_config_history_item_model_json['updated_by'] = 'IBMid-506PR16K14'
+        snapshot_config_history_item_model_json['account_id'] = 'abc'
+        snapshot_config_history_item_model_json['state'] = 'enabled'
+        snapshot_config_history_item_model_json['account_type'] = 'account'
+        snapshot_config_history_item_model_json['interval'] = 'daily'
+        snapshot_config_history_item_model_json['versioning'] = 'new'
+        snapshot_config_history_item_model_json['report_types'] = ['account_summary', 'enterprise_summary', 'account_resource_instance_usage']
+        snapshot_config_history_item_model_json['compression'] = 'GZIP'
+        snapshot_config_history_item_model_json['content_type'] = 'text/csv'
+        snapshot_config_history_item_model_json['cos_reports_folder'] = 'IBMCloud-Billing-Reports'
+        snapshot_config_history_item_model_json['cos_bucket'] = 'bucket_name'
+        snapshot_config_history_item_model_json['cos_location'] = 'us-south'
+        snapshot_config_history_item_model_json['cos_endpoint'] = 'https://s3.us-west.cloud-object-storage.test.appdomain.cloud'
+
+        # Construct a model instance of SnapshotConfigHistoryItem by calling from_dict on the json representation
+        snapshot_config_history_item_model = SnapshotConfigHistoryItem.from_dict(snapshot_config_history_item_model_json)
+        assert snapshot_config_history_item_model != False
+
+        # Construct a model instance of SnapshotConfigHistoryItem by calling from_dict on the json representation
+        snapshot_config_history_item_model_dict = SnapshotConfigHistoryItem.from_dict(snapshot_config_history_item_model_json).__dict__
+        snapshot_config_history_item_model2 = SnapshotConfigHistoryItem(**snapshot_config_history_item_model_dict)
+
+        # Verify the model instances are equivalent
+        assert snapshot_config_history_item_model == snapshot_config_history_item_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        snapshot_config_history_item_model_json2 = snapshot_config_history_item_model.to_dict()
+        assert snapshot_config_history_item_model_json2 == snapshot_config_history_item_model_json
+
+
+class TestModel_SnapshotList:
+    """
+    Test Class for SnapshotList
+    """
+
+    def test_snapshot_list_serialization(self):
+        """
+        Test serialization/deserialization for SnapshotList
+        """
+
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        snapshot_list_first_model = {}  # SnapshotListFirst
+        snapshot_list_first_model['href'] = '/v1/billing-reports-snapshots?_limit=10&account_id=272b9a4f73e11030d0ba037daee47a35&date_from=-Infinity&date_to=Infinity&month=2023-06'
+
+        snapshot_list_next_model = {}  # SnapshotListNext
+        snapshot_list_next_model['href'] = '/v1/billing-reports-snapshots?_limit=10&account_id=272b9a4f73e11030d0ba037daee47a35&date_from=-Infinity&date_to=Infinity&month=2023-06'
+
+        snapshot_list_snapshots_item_billing_period_model = {}  # SnapshotListSnapshotsItemBillingPeriod
+        snapshot_list_snapshots_item_billing_period_model['start'] = '2023-06-01T00:00:00.000Z'
+        snapshot_list_snapshots_item_billing_period_model['end'] = '2023-06-30T23:59:59.999Z'
+
+        snapshot_list_snapshots_item_report_types_item_model = {}  # SnapshotListSnapshotsItemReportTypesItem
+        snapshot_list_snapshots_item_report_types_item_model['type'] = 'account_summary'
+        snapshot_list_snapshots_item_report_types_item_model['version'] = '1.0'
+
+        snapshot_list_snapshots_item_files_item_model = {}  # SnapshotListSnapshotsItemFilesItem
+        snapshot_list_snapshots_item_files_item_model['report_types'] = 'account_summary'
+        snapshot_list_snapshots_item_files_item_model['location'] = 'june/2023-06/1685577600000/2023-06-account-summary-272b9a4f73e11030d0ba037daee47a35.csv.gz'
+        snapshot_list_snapshots_item_files_item_model['account_id'] = 'abc'
+
+        snapshot_list_snapshots_item_model = {}  # SnapshotListSnapshotsItem
+        snapshot_list_snapshots_item_model['account_id'] = 'abc'
+        snapshot_list_snapshots_item_model['month'] = '2023-06'
+        snapshot_list_snapshots_item_model['account_type'] = 'account'
+        snapshot_list_snapshots_item_model['expected_processed_at'] = 1687470383610
+        snapshot_list_snapshots_item_model['state'] = 'enabled'
+        snapshot_list_snapshots_item_model['billing_period'] = snapshot_list_snapshots_item_billing_period_model
+        snapshot_list_snapshots_item_model['snapshot_id'] = '1685577600000'
+        snapshot_list_snapshots_item_model['charset'] = 'UTF-8'
+        snapshot_list_snapshots_item_model['compression'] = 'GZIP'
+        snapshot_list_snapshots_item_model['content_type'] = 'text/csv'
+        snapshot_list_snapshots_item_model['bucket'] = 'bucket_name'
+        snapshot_list_snapshots_item_model['version'] = '1.0'
+        snapshot_list_snapshots_item_model['created_on'] = '2023-06-22T21:47:28.297Z'
+        snapshot_list_snapshots_item_model['report_types'] = [snapshot_list_snapshots_item_report_types_item_model]
+        snapshot_list_snapshots_item_model['files'] = [snapshot_list_snapshots_item_files_item_model]
+        snapshot_list_snapshots_item_model['processed_at'] = 1687470448297
+
+        # Construct a json representation of a SnapshotList model
+        snapshot_list_model_json = {}
+        snapshot_list_model_json['count'] = 3
+        snapshot_list_model_json['first'] = snapshot_list_first_model
+        snapshot_list_model_json['next'] = snapshot_list_next_model
+        snapshot_list_model_json['snapshots'] = [snapshot_list_snapshots_item_model]
+
+        # Construct a model instance of SnapshotList by calling from_dict on the json representation
+        snapshot_list_model = SnapshotList.from_dict(snapshot_list_model_json)
+        assert snapshot_list_model != False
+
+        # Construct a model instance of SnapshotList by calling from_dict on the json representation
+        snapshot_list_model_dict = SnapshotList.from_dict(snapshot_list_model_json).__dict__
+        snapshot_list_model2 = SnapshotList(**snapshot_list_model_dict)
+
+        # Verify the model instances are equivalent
+        assert snapshot_list_model == snapshot_list_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        snapshot_list_model_json2 = snapshot_list_model.to_dict()
+        assert snapshot_list_model_json2 == snapshot_list_model_json
+
+
+class TestModel_SnapshotListFirst:
+    """
+    Test Class for SnapshotListFirst
+    """
+
+    def test_snapshot_list_first_serialization(self):
+        """
+        Test serialization/deserialization for SnapshotListFirst
+        """
+
+        # Construct a json representation of a SnapshotListFirst model
+        snapshot_list_first_model_json = {}
+        snapshot_list_first_model_json['href'] = '/v1/billing-reports-snapshots?_limit=10&account_id=272b9a4f73e11030d0ba037daee47a35&date_from=-Infinity&date_to=Infinity&month=2023-06'
+
+        # Construct a model instance of SnapshotListFirst by calling from_dict on the json representation
+        snapshot_list_first_model = SnapshotListFirst.from_dict(snapshot_list_first_model_json)
+        assert snapshot_list_first_model != False
+
+        # Construct a model instance of SnapshotListFirst by calling from_dict on the json representation
+        snapshot_list_first_model_dict = SnapshotListFirst.from_dict(snapshot_list_first_model_json).__dict__
+        snapshot_list_first_model2 = SnapshotListFirst(**snapshot_list_first_model_dict)
+
+        # Verify the model instances are equivalent
+        assert snapshot_list_first_model == snapshot_list_first_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        snapshot_list_first_model_json2 = snapshot_list_first_model.to_dict()
+        assert snapshot_list_first_model_json2 == snapshot_list_first_model_json
+
+
+class TestModel_SnapshotListNext:
+    """
+    Test Class for SnapshotListNext
+    """
+
+    def test_snapshot_list_next_serialization(self):
+        """
+        Test serialization/deserialization for SnapshotListNext
+        """
+
+        # Construct a json representation of a SnapshotListNext model
+        snapshot_list_next_model_json = {}
+        snapshot_list_next_model_json['href'] = '/v1/billing-reports-snapshots?_limit=10&account_id=272b9a4f73e11030d0ba037daee47a35&date_from=-Infinity&date_to=Infinity&month=2023-06'
+
+        # Construct a model instance of SnapshotListNext by calling from_dict on the json representation
+        snapshot_list_next_model = SnapshotListNext.from_dict(snapshot_list_next_model_json)
+        assert snapshot_list_next_model != False
+
+        # Construct a model instance of SnapshotListNext by calling from_dict on the json representation
+        snapshot_list_next_model_dict = SnapshotListNext.from_dict(snapshot_list_next_model_json).__dict__
+        snapshot_list_next_model2 = SnapshotListNext(**snapshot_list_next_model_dict)
+
+        # Verify the model instances are equivalent
+        assert snapshot_list_next_model == snapshot_list_next_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        snapshot_list_next_model_json2 = snapshot_list_next_model.to_dict()
+        assert snapshot_list_next_model_json2 == snapshot_list_next_model_json
+
+
+class TestModel_SnapshotListSnapshotsItem:
+    """
+    Test Class for SnapshotListSnapshotsItem
+    """
+
+    def test_snapshot_list_snapshots_item_serialization(self):
+        """
+        Test serialization/deserialization for SnapshotListSnapshotsItem
+        """
+
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        snapshot_list_snapshots_item_billing_period_model = {}  # SnapshotListSnapshotsItemBillingPeriod
+        snapshot_list_snapshots_item_billing_period_model['start'] = '2023-06-01T00:00:00.000Z'
+        snapshot_list_snapshots_item_billing_period_model['end'] = '2023-06-30T23:59:59.999Z'
+
+        snapshot_list_snapshots_item_report_types_item_model = {}  # SnapshotListSnapshotsItemReportTypesItem
+        snapshot_list_snapshots_item_report_types_item_model['type'] = 'account_summary'
+        snapshot_list_snapshots_item_report_types_item_model['version'] = '1.0'
+
+        snapshot_list_snapshots_item_files_item_model = {}  # SnapshotListSnapshotsItemFilesItem
+        snapshot_list_snapshots_item_files_item_model['report_types'] = 'account_summary'
+        snapshot_list_snapshots_item_files_item_model['location'] = 'june/2023-06/1685577600000/2023-06-account-summary-272b9a4f73e11030d0ba037daee47a35.csv.gz'
+        snapshot_list_snapshots_item_files_item_model['account_id'] = 'abc'
+
+        # Construct a json representation of a SnapshotListSnapshotsItem model
+        snapshot_list_snapshots_item_model_json = {}
+        snapshot_list_snapshots_item_model_json['account_id'] = 'abc'
+        snapshot_list_snapshots_item_model_json['month'] = '2023-06'
+        snapshot_list_snapshots_item_model_json['account_type'] = 'account'
+        snapshot_list_snapshots_item_model_json['expected_processed_at'] = 1687470383610
+        snapshot_list_snapshots_item_model_json['state'] = 'enabled'
+        snapshot_list_snapshots_item_model_json['billing_period'] = snapshot_list_snapshots_item_billing_period_model
+        snapshot_list_snapshots_item_model_json['snapshot_id'] = '1685577600000'
+        snapshot_list_snapshots_item_model_json['charset'] = 'UTF-8'
+        snapshot_list_snapshots_item_model_json['compression'] = 'GZIP'
+        snapshot_list_snapshots_item_model_json['content_type'] = 'text/csv'
+        snapshot_list_snapshots_item_model_json['bucket'] = 'bucket_name'
+        snapshot_list_snapshots_item_model_json['version'] = '1.0'
+        snapshot_list_snapshots_item_model_json['created_on'] = '2023-06-22T21:47:28.297Z'
+        snapshot_list_snapshots_item_model_json['report_types'] = [snapshot_list_snapshots_item_report_types_item_model]
+        snapshot_list_snapshots_item_model_json['files'] = [snapshot_list_snapshots_item_files_item_model]
+        snapshot_list_snapshots_item_model_json['processed_at'] = 1687470448297
+
+        # Construct a model instance of SnapshotListSnapshotsItem by calling from_dict on the json representation
+        snapshot_list_snapshots_item_model = SnapshotListSnapshotsItem.from_dict(snapshot_list_snapshots_item_model_json)
+        assert snapshot_list_snapshots_item_model != False
+
+        # Construct a model instance of SnapshotListSnapshotsItem by calling from_dict on the json representation
+        snapshot_list_snapshots_item_model_dict = SnapshotListSnapshotsItem.from_dict(snapshot_list_snapshots_item_model_json).__dict__
+        snapshot_list_snapshots_item_model2 = SnapshotListSnapshotsItem(**snapshot_list_snapshots_item_model_dict)
+
+        # Verify the model instances are equivalent
+        assert snapshot_list_snapshots_item_model == snapshot_list_snapshots_item_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        snapshot_list_snapshots_item_model_json2 = snapshot_list_snapshots_item_model.to_dict()
+        assert snapshot_list_snapshots_item_model_json2 == snapshot_list_snapshots_item_model_json
+
+
+class TestModel_SnapshotListSnapshotsItemBillingPeriod:
+    """
+    Test Class for SnapshotListSnapshotsItemBillingPeriod
+    """
+
+    def test_snapshot_list_snapshots_item_billing_period_serialization(self):
+        """
+        Test serialization/deserialization for SnapshotListSnapshotsItemBillingPeriod
+        """
+
+        # Construct a json representation of a SnapshotListSnapshotsItemBillingPeriod model
+        snapshot_list_snapshots_item_billing_period_model_json = {}
+        snapshot_list_snapshots_item_billing_period_model_json['start'] = '2023-06-01T00:00:00.000Z'
+        snapshot_list_snapshots_item_billing_period_model_json['end'] = '2023-06-30T23:59:59.999Z'
+
+        # Construct a model instance of SnapshotListSnapshotsItemBillingPeriod by calling from_dict on the json representation
+        snapshot_list_snapshots_item_billing_period_model = SnapshotListSnapshotsItemBillingPeriod.from_dict(snapshot_list_snapshots_item_billing_period_model_json)
+        assert snapshot_list_snapshots_item_billing_period_model != False
+
+        # Construct a model instance of SnapshotListSnapshotsItemBillingPeriod by calling from_dict on the json representation
+        snapshot_list_snapshots_item_billing_period_model_dict = SnapshotListSnapshotsItemBillingPeriod.from_dict(snapshot_list_snapshots_item_billing_period_model_json).__dict__
+        snapshot_list_snapshots_item_billing_period_model2 = SnapshotListSnapshotsItemBillingPeriod(**snapshot_list_snapshots_item_billing_period_model_dict)
+
+        # Verify the model instances are equivalent
+        assert snapshot_list_snapshots_item_billing_period_model == snapshot_list_snapshots_item_billing_period_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        snapshot_list_snapshots_item_billing_period_model_json2 = snapshot_list_snapshots_item_billing_period_model.to_dict()
+        assert snapshot_list_snapshots_item_billing_period_model_json2 == snapshot_list_snapshots_item_billing_period_model_json
+
+
+class TestModel_SnapshotListSnapshotsItemFilesItem:
+    """
+    Test Class for SnapshotListSnapshotsItemFilesItem
+    """
+
+    def test_snapshot_list_snapshots_item_files_item_serialization(self):
+        """
+        Test serialization/deserialization for SnapshotListSnapshotsItemFilesItem
+        """
+
+        # Construct a json representation of a SnapshotListSnapshotsItemFilesItem model
+        snapshot_list_snapshots_item_files_item_model_json = {}
+        snapshot_list_snapshots_item_files_item_model_json['report_types'] = 'account_summary'
+        snapshot_list_snapshots_item_files_item_model_json['location'] = 'june/2023-06/1685577600000/2023-06-account-summary-272b9a4f73e11030d0ba037daee47a35.csv.gz'
+        snapshot_list_snapshots_item_files_item_model_json['account_id'] = 'abc'
+
+        # Construct a model instance of SnapshotListSnapshotsItemFilesItem by calling from_dict on the json representation
+        snapshot_list_snapshots_item_files_item_model = SnapshotListSnapshotsItemFilesItem.from_dict(snapshot_list_snapshots_item_files_item_model_json)
+        assert snapshot_list_snapshots_item_files_item_model != False
+
+        # Construct a model instance of SnapshotListSnapshotsItemFilesItem by calling from_dict on the json representation
+        snapshot_list_snapshots_item_files_item_model_dict = SnapshotListSnapshotsItemFilesItem.from_dict(snapshot_list_snapshots_item_files_item_model_json).__dict__
+        snapshot_list_snapshots_item_files_item_model2 = SnapshotListSnapshotsItemFilesItem(**snapshot_list_snapshots_item_files_item_model_dict)
+
+        # Verify the model instances are equivalent
+        assert snapshot_list_snapshots_item_files_item_model == snapshot_list_snapshots_item_files_item_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        snapshot_list_snapshots_item_files_item_model_json2 = snapshot_list_snapshots_item_files_item_model.to_dict()
+        assert snapshot_list_snapshots_item_files_item_model_json2 == snapshot_list_snapshots_item_files_item_model_json
+
+
+class TestModel_SnapshotListSnapshotsItemReportTypesItem:
+    """
+    Test Class for SnapshotListSnapshotsItemReportTypesItem
+    """
+
+    def test_snapshot_list_snapshots_item_report_types_item_serialization(self):
+        """
+        Test serialization/deserialization for SnapshotListSnapshotsItemReportTypesItem
+        """
+
+        # Construct a json representation of a SnapshotListSnapshotsItemReportTypesItem model
+        snapshot_list_snapshots_item_report_types_item_model_json = {}
+        snapshot_list_snapshots_item_report_types_item_model_json['type'] = 'account_summary'
+        snapshot_list_snapshots_item_report_types_item_model_json['version'] = '1.0'
+
+        # Construct a model instance of SnapshotListSnapshotsItemReportTypesItem by calling from_dict on the json representation
+        snapshot_list_snapshots_item_report_types_item_model = SnapshotListSnapshotsItemReportTypesItem.from_dict(snapshot_list_snapshots_item_report_types_item_model_json)
+        assert snapshot_list_snapshots_item_report_types_item_model != False
+
+        # Construct a model instance of SnapshotListSnapshotsItemReportTypesItem by calling from_dict on the json representation
+        snapshot_list_snapshots_item_report_types_item_model_dict = SnapshotListSnapshotsItemReportTypesItem.from_dict(snapshot_list_snapshots_item_report_types_item_model_json).__dict__
+        snapshot_list_snapshots_item_report_types_item_model2 = SnapshotListSnapshotsItemReportTypesItem(**snapshot_list_snapshots_item_report_types_item_model_dict)
+
+        # Verify the model instances are equivalent
+        assert snapshot_list_snapshots_item_report_types_item_model == snapshot_list_snapshots_item_report_types_item_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        snapshot_list_snapshots_item_report_types_item_model_json2 = snapshot_list_snapshots_item_report_types_item_model.to_dict()
+        assert snapshot_list_snapshots_item_report_types_item_model_json2 == snapshot_list_snapshots_item_report_types_item_model_json
+
+
+class TestModel_SnapshotConfig:
+    """
+    Test Class for SnapshotConfig
+    """
+
+    def test_snapshot_config_serialization(self):
+        """
+        Test serialization/deserialization for SnapshotConfig
+        """
+
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        snapshot_config_history_item_model = {}  # SnapshotConfigHistoryItem
+        snapshot_config_history_item_model['start_time'] = 1687469854342
+        snapshot_config_history_item_model['end_time'] = 1687469989326
+        snapshot_config_history_item_model['updated_by'] = 'IBMid-506PR16K14'
+        snapshot_config_history_item_model['account_id'] = 'abc'
+        snapshot_config_history_item_model['state'] = 'enabled'
+        snapshot_config_history_item_model['account_type'] = 'account'
+        snapshot_config_history_item_model['interval'] = 'daily'
+        snapshot_config_history_item_model['versioning'] = 'new'
+        snapshot_config_history_item_model['report_types'] = ['account_summary', 'enterprise_summary', 'account_resource_instance_usage']
+        snapshot_config_history_item_model['compression'] = 'GZIP'
+        snapshot_config_history_item_model['content_type'] = 'text/csv'
+        snapshot_config_history_item_model['cos_reports_folder'] = 'IBMCloud-Billing-Reports'
+        snapshot_config_history_item_model['cos_bucket'] = 'bucket_name'
+        snapshot_config_history_item_model['cos_location'] = 'us-south'
+        snapshot_config_history_item_model['cos_endpoint'] = 'https://s3.us-west.cloud-object-storage.test.appdomain.cloud'
+
+        # Construct a json representation of a SnapshotConfig model
+        snapshot_config_model_json = {}
+        snapshot_config_model_json['account_id'] = 'abc'
+        snapshot_config_model_json['state'] = 'enabled'
+        snapshot_config_model_json['account_type'] = 'account'
+        snapshot_config_model_json['interval'] = 'daily'
+        snapshot_config_model_json['versioning'] = 'new'
+        snapshot_config_model_json['report_types'] = ['account_summary', 'enterprise_summary', 'account_resource_instance_usage']
+        snapshot_config_model_json['compression'] = 'GZIP'
+        snapshot_config_model_json['content_type'] = 'text/csv'
+        snapshot_config_model_json['cos_reports_folder'] = 'IBMCloud-Billing-Reports'
+        snapshot_config_model_json['cos_bucket'] = 'bucket_name'
+        snapshot_config_model_json['cos_location'] = 'us-south'
+        snapshot_config_model_json['cos_endpoint'] = 'https://s3.us-west.cloud-object-storage.test.appdomain.cloud'
+        snapshot_config_model_json['created_at'] = 1687469854342
+        snapshot_config_model_json['last_updated_at'] = 1687469989326
+        snapshot_config_model_json['history'] = [snapshot_config_history_item_model]
+
+        # Construct a model instance of SnapshotConfig by calling from_dict on the json representation
+        snapshot_config_model = SnapshotConfig.from_dict(snapshot_config_model_json)
+        assert snapshot_config_model != False
+
+        # Construct a model instance of SnapshotConfig by calling from_dict on the json representation
+        snapshot_config_model_dict = SnapshotConfig.from_dict(snapshot_config_model_json).__dict__
+        snapshot_config_model2 = SnapshotConfig(**snapshot_config_model_dict)
+
+        # Verify the model instances are equivalent
+        assert snapshot_config_model == snapshot_config_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        snapshot_config_model_json2 = snapshot_config_model.to_dict()
+        assert snapshot_config_model_json2 == snapshot_config_model_json
+
+
 class TestModel_Subscription:
     """
     Test Class for Subscription
@@ -2247,9 +3464,7 @@ class TestModel_SubscriptionTermCredits:
         assert subscription_term_credits_model != False
 
         # Construct a model instance of SubscriptionTermCredits by calling from_dict on the json representation
-        subscription_term_credits_model_dict = SubscriptionTermCredits.from_dict(
-            subscription_term_credits_model_json
-        ).__dict__
+        subscription_term_credits_model_dict = SubscriptionTermCredits.from_dict(subscription_term_credits_model_json).__dict__
         subscription_term_credits_model2 = SubscriptionTermCredits(**subscription_term_credits_model_dict)
 
         # Verify the model instances are equivalent
